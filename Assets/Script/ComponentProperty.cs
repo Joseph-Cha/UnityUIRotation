@@ -6,12 +6,12 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using System.Collections;
 
 public class ComponentProperty : MonoBehaviour
 {
     [SerializeField]
     private Transform Target;
-
     private void Awake()
     {
         if (Target == null)
@@ -24,6 +24,7 @@ public class ComponentProperty : MonoBehaviour
         CreateJsonDirectory();
 
         IEnumerable<Component> Components = Target.GetComponentsInChildren<Component>(true)?.Where(component => component.CompareTag("UIProperty"));
+        // IEnumerable<Component> Components2 = GameObject.FindGameObjectsWithTag("UIProperty").Select(obj => obj.GetComponent<Component>());
         if (Components != null)
             Save(Components);
         else
@@ -63,6 +64,39 @@ public class ComponentProperty : MonoBehaviour
         Debug.Log($"Save Complete. (Current Orientaion : {CurrentOrientaion()})");       
 
     }
+
+    public void Load()
+    {
+        TextAsset jsonFile;
+        string resourcePath = GetPathByOrientation();
+        
+        try
+        {
+            jsonFile = Resources.Load<TextAsset>(resourcePath);
+        }
+        catch
+        {            
+            Debug.Log("Fail to load file. Please check if the file exist");
+            return;
+        }
+
+        if(jsonFile != null)
+        {
+            var store = JsonConvert.DeserializeObject<ComponentStore>(jsonFile.text);
+            StartCoroutine(Load(store));
+        }
+
+    }
+
+    private IEnumerator Load(ComponentStore store)
+    {
+        foreach(var ComponentInfo in store.Data) 
+        {
+            
+            yield return null;
+        }
+    }
+
     private string GetPathByOrientation()
     {
         ScreenOrientation type = CurrentOrientaion();

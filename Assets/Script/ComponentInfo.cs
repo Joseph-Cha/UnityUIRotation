@@ -12,6 +12,8 @@ public class ComponentInfo
 {
     public ComponentInfo(Component component)
     {
+        // Type type = typeof(Component);
+        // PropertyInfo[] Components = type.GetProperties();    
         JsonSerializerSettings JsonSetting = new JsonSerializerSettings()
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -19,6 +21,11 @@ public class ComponentInfo
         switch(component)
         {
             case RectTransform rectTransform:
+                // PropertyInfo[] rectTransforminfo = rectTransform.GetType().GetProperties();
+                // foreach(var info in rectTransforminfo)
+                // {
+                //     ComponentInfos.Add(info.Name, info.GetValue(component).ToString());
+                // }
                 ComponentInfos.Add(nameof(rectTransform.sizeDelta), JsonConvert.SerializeObject(rectTransform.sizeDelta, JsonSetting));
                 ComponentInfos.Add(nameof(rectTransform.pivot), JsonConvert.SerializeObject(rectTransform.pivot, JsonSetting));
                 ComponentInfos.Add(nameof(rectTransform.anchorMin), JsonConvert.SerializeObject(rectTransform.anchorMin, JsonSetting));
@@ -27,7 +34,7 @@ public class ComponentInfo
                 ComponentInfos.Add(nameof(rectTransform.localPosition), JsonConvert.SerializeObject(rectTransform.localPosition, JsonSetting));
                 ComponentInfos.Add(nameof(rectTransform.localRotation), JsonConvert.SerializeObject(rectTransform.localRotation, JsonSetting));
                 ComponentInfos.Add(nameof(rectTransform.anchoredPosition), JsonConvert.SerializeObject(rectTransform.anchoredPosition, JsonSetting));
-                // RectTransformInfos = rectTransform.GetType().GetProperties();
+                // // RectTransformInfos = rectTransform.GetType().GetProperties();
                 // RectTransformInfos = rectTransform.GetType().GetProperties();
                 break;
 
@@ -135,6 +142,29 @@ public class ComponentInfo
         }
     }
     public Dictionary<string, string> ComponentInfos = new Dictionary<string, string>();
+
+    // Root 트랜스폼을 가지고 와야함
+    // GetPath로 현재 Transform 정보가 필요함
+    // Transform transform = root.Find(Path)을 통해 현재 자신의 정보를 알아야하고
+    // 거기서 GetComponent를 해서 해당 component를 찾아서 대입시켜야함.
+    public void Apply(Component component)
+    {
+        switch(component)
+        {
+            case RectTransform rectTransform:
+                break;
+            case LayoutElement layoutElement:
+                break;
+            case VerticalLayoutGroup verticalLayoutGroup:
+                break;
+            case GridLayoutGroup gridLayoutGroup:
+                break;
+            case TMP_Text text:
+                break;
+            case ScrollRect scrollRect:
+                break;
+        }
+    }
 
     // 향후 componet의 Property 값을 추가 하기 위해 삭제 금지
     // private PropertyInfo[] RectTransformInfos;
