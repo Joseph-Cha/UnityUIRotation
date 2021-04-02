@@ -12,6 +12,7 @@ public class ComponentProperty : MonoBehaviour
 {
     [SerializeField]
     private Transform Target;
+    private IEnumerable<Component> components = new Queue<Component>();
     private void Awake()
     {
         if (Target == null)
@@ -22,22 +23,21 @@ public class ComponentProperty : MonoBehaviour
     public void Save()
     {
         CreateJsonDirectory();
-
-        IEnumerable<Component> Components = Target.GetComponentsInChildren<Component>(true)?.Where(component => component.CompareTag("UIProperty"));
-        // IEnumerable<Component> Components2 = GameObject.FindGameObjectsWithTag("UIProperty").Select(obj => obj.GetComponent<Component>());
-        if (Components != null)
-            Save(Components);
+        components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty"));
+        
+        if (components != null)
+            Save(components);
         else
-            Debug.Log("There are no Components tagged \"UIProperty\" in the target");
+            Debug.Log("There are no Components tagged \"UIProperty\" in the target");        
     }
 
-    private void Save(IEnumerable<Component> Components)
+    private void Save(IEnumerable<Component> components)
     {
         // Arrage components data
         string path =  $"{Application.dataPath}/Resources/{GetPathByOrientation()}/{name}.json";
         string jsonData = string.Empty;
         ComponentStore StoreInfo = new ComponentStore();
-        Components.ToList().ForEach(Component => StoreInfo.Data.Add(new ComponentInfo(Component)));
+        components.ToList().ForEach(Component => StoreInfo.Data.Add(new ComponentInfo(Component)));
 
         // Convert components data to json
         try
@@ -57,12 +57,11 @@ public class ComponentProperty : MonoBehaviour
          if(File.Exists(path))
             File.Delete(path);
         File.WriteAllText(path, jsonData);
-
         #if UNITY_EDITOR
-        AssetDatabase.Refresh();
+        var relativePath = $"Assets/Resources/{GetPathByOrientation()}/{name}.json";
+        AssetDatabase.ImportAsset(relativePath);
         #endif
-        Debug.Log($"Save Complete. (Current Orientaion : {CurrentOrientaion()})");       
-
+        Debug.Log($"Save Complete.\nCurrent Orientaion : {CurrentOrientaion()}, File Name : {name}.json" );
     }
 
     public void Load()
@@ -82,18 +81,8 @@ public class ComponentProperty : MonoBehaviour
 
         if(jsonFile != null)
         {
-            var store = JsonConvert.DeserializeObject<ComponentStore>(jsonFile.text);
-            StartCoroutine(Load(store));
-        }
-
-    }
-
-    private IEnumerator Load(ComponentStore store)
-    {
-        foreach(var ComponentInfo in store.Data) 
-        {
-            
-            yield return null;
+            var store = JsonConvert.DeserializeObject<ComponentInfo>(jsonFile.text);
+            store.Apply(components);
         }
     }
 
