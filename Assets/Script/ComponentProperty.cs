@@ -12,44 +12,40 @@ public class ComponentProperty : MonoBehaviour
 {
     [SerializeField]
     private Transform Target;
-    private IEnumerable<Component> components = new Queue<Component>();
+
     private void Awake()
     {
         if (Target == null)
             Target = GetComponent<Transform>();
     }
-    
+
     [ContextMenu("Save")]
     public void Save()
     {
         CreateJsonDirectory();
-        components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty"));
-        
+        List<Component> components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty")).ToList();
         if (components != null)
             Save(components);
         else
-            Debug.Log("There are no Components tagged \"UIProperty\" in the target");        
+            Debug.LogError("There are no Components tagged \"UIProperty\" in the target");        
     }
 
     private void Save(IEnumerable<Component> components)
     {
         // Arrage components data
-        string path =  $"{Application.dataPath}/Resources/{GetPathByOrientation()}/{name}.json";
+        string path =  $"{Application.dataPath}/Resources/{GetPathByOrientation()}/{Target.name}.json";
         string jsonData = string.Empty;
-        ComponentStore StoreInfo = new ComponentStore();
-        components.ToList().ForEach(Component => StoreInfo.Data.Add(new ComponentInfo(Component)));
+        ComponentStore componentStore = new ComponentStore();
+        components.ToList().ForEach(component => componentStore.Data.Add(new ComponentInfo(component)));
 
         // Convert components data to json
         try
         {
-            jsonData = JsonConvert.SerializeObject(StoreInfo, new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
+            jsonData = JsonUtility.ToJson(componentStore);
         }
         catch(Exception e)
         {
-            Debug.Log(e.Message);
+            Debug.LogError(e.Message);
             return;
         }
         
@@ -58,32 +54,42 @@ public class ComponentProperty : MonoBehaviour
             File.Delete(path);
         File.WriteAllText(path, jsonData);
         #if UNITY_EDITOR
-        var relativePath = $"Assets/Resources/{GetPathByOrientation()}/{name}.json";
+        var relativePath = $"Assets/Resources/{GetPathByOrientation()}/{Target.name}.json";
         AssetDatabase.ImportAsset(relativePath);
         #endif
-        Debug.Log($"Save Complete.\nCurrent Orientaion : {CurrentOrientaion()}, File Name : {name}.json" );
+        Debug.Log($"Save Complete.\nCurrent Orientaion : {CurrentOrientaion()}, File Name : {Target.name}.json" );
     }
 
+
+    [ContextMenu("Load")]    
     public void Load()
     {
+        List<Component> components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty")).ToList();
+
         TextAsset jsonFile;
-        string resourcePath = GetPathByOrientation();
-        
-        try
+        string resourcePath = $"{GetPathByOrientation()}/{Target.name}";
+        jsonFile = Resources.Load<TextAsset>(resourcePath);
+        if(jsonFile == null)
         {
-            jsonFile = Resources.Load<TextAsset>(resourcePath);
-        }
-        catch
-        {            
-            Debug.Log("Fail to load file. Please check if the file exist");
+            Debug.LogError("It couldn't find saved file. You must save first and try again");
             return;
         }
 
-        if(jsonFile != null)
+        try
         {
-            var store = JsonConvert.DeserializeObject<ComponentInfo>(jsonFile.text);
-            store.Apply(components);
+            var store = JsonUtility.FromJson<ComponentStore>(jsonFile.text);
+            for (int i = 0; i < components.Count(); i++)
+            {
+                store.Data[i].SetPropertyValueByComponent(components[i]);
+            }
         }
+        catch(Exception e)
+        {         
+            Debug.LogError(e.Message);   
+            return;
+        }
+
+        Debug.Log("Load complete");
     }
 
     private string GetPathByOrientation()

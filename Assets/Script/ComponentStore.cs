@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+// ComponentInfo
 [Serializable]
 public class ComponentStore
 {

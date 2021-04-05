@@ -2,17 +2,23 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
-using Newtonsoft.Json;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 
+[Serializable]
+public class PropertyNameValuePair
+{
+    public string Name;
+    public string Value;
+}
+
 // 하나의 Root Transform에서 가지고 있는 components들의 속성 정보를 저장
 [Serializable]
 public class ComponentInfo
 {
-#region  ComponentInfo ctor
+#region ComponentInfo ctor
     public ComponentInfo(Component component)
     {
         switch(component)
@@ -58,13 +64,13 @@ public class ComponentInfo
         }
     }
 #endregion
-    public Dictionary<string, string> ComponentInfos = new Dictionary<string, string>();
-    private JsonSerializerSettings JsonSetting = new JsonSerializerSettings()
+    public List<PropertyNameValuePair> Properties = new List<PropertyNameValuePair>();
+    private PropertyInfo GetPropertyInfo(string name, object target)
     {
-        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-    };
-
-#region  PropertyNames
+        Type type = target?.GetType();
+        return type.GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
+    }
+#region PropertyNames
     private string[] rectTransformPropertyNames = 
     { 
         nameof(RectTransform.sizeDelta),
@@ -96,15 +102,19 @@ public class ComponentInfo
         nameof(VerticalLayoutGroup.childScaleHeight),
         nameof(VerticalLayoutGroup.reverseArrangement),
         nameof(VerticalLayoutGroup.padding),
-        nameof(VerticalLayoutGroup.childAlignment),
-        nameof(VerticalLayoutGroup.minWidth),
-        nameof(VerticalLayoutGroup.preferredWidth),
-        nameof(VerticalLayoutGroup.flexibleWidth),
-        nameof(VerticalLayoutGroup.minHeight),
-        nameof(VerticalLayoutGroup.preferredHeight),
-        nameof(VerticalLayoutGroup.flexibleHeight)
+        nameof(VerticalLayoutGroup.childAlignment)
     };
-    private string[] gridLayoutGroupPropertyNames;
+    private string[] gridLayoutGroupPropertyNames =
+    {
+        nameof(GridLayoutGroup.startCorner),
+        nameof(GridLayoutGroup.startAxis),
+        nameof(GridLayoutGroup.cellSize),
+        nameof(GridLayoutGroup.spacing),
+        nameof(GridLayoutGroup.constraint),
+        nameof(GridLayoutGroup.constraintCount),
+        nameof(GridLayoutGroup.padding),
+        nameof(GridLayoutGroup.childAlignment)
+    };
     private string[] tmp_TextPropertyNames = 
     {
         nameof(TMP_Text.alignment),
@@ -131,23 +141,23 @@ public class ComponentInfo
         nameof(ScrollRect.inertia),
         nameof(ScrollRect.decelerationRate),
         nameof(ScrollRect.scrollSensitivity),
-        nameof(ScrollRect.horizontalScrollbar),
-        nameof(ScrollRect.verticalScrollbar),
+        // nameof(ScrollRect.horizontalScrollbar),
+        // nameof(ScrollRect.verticalScrollbar),
         nameof(ScrollRect.horizontalScrollbarVisibility),
         nameof(ScrollRect.verticalScrollbarVisibility),
         nameof(ScrollRect.horizontalScrollbarSpacing),
         nameof(ScrollRect.verticalScrollbarSpacing),
-        nameof(ScrollRect.onValueChanged),
-        nameof(ScrollRect.velocity),
-        nameof(ScrollRect.normalizedPosition),
-        nameof(ScrollRect.horizontalNormalizedPosition),
-        nameof(ScrollRect.verticalNormalizedPosition),
-        nameof(ScrollRect.minWidth),
-        nameof(ScrollRect.preferredWidth),
-        nameof(ScrollRect.flexibleWidth),
-        nameof(ScrollRect.minHeight),
-        nameof(ScrollRect.preferredHeight),
-        nameof(ScrollRect.flexibleHeight)
+        // nameof(ScrollRect.onValueChanged),
+        // nameof(ScrollRect.velocity),
+        // nameof(ScrollRect.normalizedPosition),
+        // nameof(ScrollRect.horizontalNormalizedPosition),
+        // nameof(ScrollRect.verticalNormalizedPosition),
+        // nameof(ScrollRect.minWidth),
+        // nameof(ScrollRect.preferredWidth),
+        // nameof(ScrollRect.flexibleWidth),
+        // nameof(ScrollRect.minHeight),
+        // nameof(ScrollRect.preferredHeight),
+        // nameof(ScrollRect.flexibleHeight)
     };
 #endregion    
     
@@ -160,8 +170,23 @@ public class ComponentInfo
             {
                 try
                 {
-                    ComponentInfos.Add(propertyName, 
-                        JsonConvert.SerializeObject(GetValueByPropertyName(propertyName, target), JsonSetting));
+                    PropertyInfo info = GetPropertyInfo(propertyName, target);
+                    if(info.PropertyType.IsPrimitive)
+                    {
+                        Properties.Add(new PropertyNameValuePair
+                        {
+                            Name = propertyName, 
+                            Value = GetValueByPropertyName(propertyName, target).ToString()
+                        });
+                    }
+                    else
+                    {
+                        Properties.Add(new PropertyNameValuePair
+                        {
+                            Name = propertyName, 
+                            Value = JsonUtility.ToJson(GetValueByPropertyName(propertyName, target))
+                        });
+                    }
                 }
                 catch(Exception e)
                 {
@@ -174,66 +199,54 @@ public class ComponentInfo
     private object GetValueByPropertyName(string name, object target)
     {
         Type type = target?.GetType();
-        PropertyInfo info = type.GetProperty(name);
+        PropertyInfo info = type.GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
         return info?.GetValue(target);
     }
 #endregion
 
 #region Load Logic
-    private void Apply(Component component)
+    public void SetPropertyValueByComponent(Component component)
     {
         switch(component)
         {
             case RectTransform rectTransform:
-                SetValueByPropertyName(rectTransformPropertyNames, rectTransform);
+                SetValueByTarget(rectTransform);
                 break;
             case LayoutElement layoutElement:
-                SetValueByPropertyName(layoutElementPropertyNames, layoutElement);
+                SetValueByTarget(layoutElement);
                 break;
             case VerticalLayoutGroup verticalLayoutGroup:
-                SetValueByPropertyName(verticalLayoutGroupPropertyNames, verticalLayoutGroup);
+                SetValueByTarget(verticalLayoutGroup);
                 break;
             case GridLayoutGroup gridLayoutGroup:
-                SetValueByPropertyName(gridLayoutGroupPropertyNames, gridLayoutGroup);
+                SetValueByTarget(gridLayoutGroup);
                 break;
             case TMP_Text text:
-                SetValueByPropertyName(tmp_TextPropertyNames, text);
+                SetValueByTarget(text);
                 break;
             case ScrollRect scrollRect:
-                SetValueByPropertyName(scrollRectPropertyNames, scrollRect);
+                SetValueByTarget(scrollRect);
                 break;
             default:
                 break;
         }
     }
-
-    public void Apply(IEnumerable<Component> components)
+    private void SetValueByTarget(object target)
     {
-        var enumerator = components.GetEnumerator();
-        while (enumerator.MoveNext())
+        foreach(var property in Properties)
         {
-            Apply(enumerator.Current);
-        }
-    }
+            PropertyInfo info = GetPropertyInfo(property.Name, target);//targetType.GetProperty(property.Key, BindingFlags.Public | BindingFlags.Instance);
+            Type PropertyType = info?.PropertyType;
+            object obj = null;
+            if(PropertyType.IsPrimitive)
+                obj = Convert.ChangeType(property.Value, PropertyType);
+            else
+                obj = JsonUtility.FromJson(property.Value, PropertyType);
 
-    private void SetValueByPropertyName(string[] PropertyNames, object target)
-    {
-        foreach (var name in PropertyNames)
-        {
-            Type type = target?.GetType();
-            PropertyInfo info = type.GetProperty(name);
-            info.SetValue(target, GetDeserializeValuebyName(name));
+            info.SetValue(target, obj);
         }
-    }
-
-    private object GetDeserializeValuebyName(string name)
-    {
-        object ob = JsonConvert.DeserializeObject<object>(ComponentInfos[name]);
-        return ob;
     }
 #endregion
-
-
 
     // 향후 componet의 Property 값을 추가 하기 위해 삭제 금지
     // private PropertyInfo[] RectTransformInfos;
