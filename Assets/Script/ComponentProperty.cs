@@ -1,12 +1,19 @@
 using UnityEngine;
-using Newtonsoft.Json;
 using System;
 using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
-using System.Collections;
+enum ComponentType
+{
+    RectTransform,
+    LayoutElement,
+    VerticalLayoutGroup,
+    GridLayoutGroup,
+    TMP_Text,
+    ScrollRect
+}
 
 public class ComponentProperty : MonoBehaviour
 {
@@ -24,10 +31,37 @@ public class ComponentProperty : MonoBehaviour
     {
         CreateJsonDirectory();
         List<Component> components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty")).ToList();
+        IEnumerable<Component> components2 = 
+            Target.GetComponentsInChildren<Component>(true).Where(component => 
+            {
+                bool hasType = false;
+                if(component.CompareTag("UIProperty"))
+                {
+                    hasType = true;
+                    // if (SelectByComponent(component))
+                    // {
+                    //     hasType = true;
+                    // }
+                }
+                return hasType;
+            });
         if (components != null)
             Save(components);
         else
             Debug.LogError("There are no Components tagged \"UIProperty\" in the target");        
+    }
+
+    private bool SelectByComponent(Component component)
+    {
+        bool hasType = false;
+        foreach(var type in Enum.GetValues(typeof(ComponentType)))
+        {
+            if(type.Equals(component.ToString()))
+            {
+                hasType = true;
+            }
+        }
+        return hasType;
     }
 
     private void Save(IEnumerable<Component> components)
