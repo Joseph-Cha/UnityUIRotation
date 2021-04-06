@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+
 enum ComponentType
 {
     RectTransform,
@@ -19,7 +20,7 @@ public class ComponentProperty : MonoBehaviour
 {
     [SerializeField]
     private Transform Target;
-
+    List<Component> components = new List<Component>();
     private void Awake()
     {
         if (Target == null)
@@ -30,38 +31,31 @@ public class ComponentProperty : MonoBehaviour
     public void Save()
     {
         CreateJsonDirectory();
-        List<Component> components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty")).ToList();
-        IEnumerable<Component> components2 = 
-            Target.GetComponentsInChildren<Component>(true).Where(component => 
-            {
-                bool hasType = false;
-                if(component.CompareTag("UIProperty"))
-                {
-                    hasType = true;
-                    // if (SelectByComponent(component))
-                    // {
-                    //     hasType = true;
-                    // }
-                }
-                return hasType;
-            });
+        
+        if(components == null)
+        {
+            components = 
+                Target.GetComponentsInChildren<Component>(true).
+                Where(component => component.CompareTag("UIProperty")).
+                Where(component => SelectByComponentType(component)).ToList();
+        }
+        
         if (components != null)
             Save(components);
         else
             Debug.LogError("There are no Components tagged \"UIProperty\" in the target");        
     }
 
-    private bool SelectByComponent(Component component)
+    private bool SelectByComponentType(Component component)
     {
-        bool hasType = false;
+        Type componetType = component.GetType();
+        string name = componetType?.Name;
         foreach(var type in Enum.GetValues(typeof(ComponentType)))
         {
-            if(type.Equals(component.ToString()))
-            {
-                hasType = true;
-            }
+            if (name.Equals(type?.ToString()))
+                return true;
         }
-        return hasType;
+        return false;
     }
 
     private void Save(IEnumerable<Component> components)
@@ -94,15 +88,22 @@ public class ComponentProperty : MonoBehaviour
         Debug.Log($"Save Complete.\nCurrent Orientaion : {CurrentOrientaion()}, File Name : {Target.name}.json" );
     }
 
-
     [ContextMenu("Load")]    
     public void Load()
     {
-        List<Component> components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty")).ToList();
+        // List<Component> components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty")).ToList();
+        if(components == null)
+        {
+            components = 
+                Target.GetComponentsInChildren<Component>(true).
+                Where(component => component.CompareTag("UIProperty")).
+                Where(component => SelectByComponentType(component)).ToList();
+        }
 
         TextAsset jsonFile;
         string resourcePath = $"{GetPathByOrientation()}/{Target.name}";
         jsonFile = Resources.Load<TextAsset>(resourcePath);
+
         if(jsonFile == null)
         {
             Debug.LogError("It couldn't find saved file. You must save first and try again");

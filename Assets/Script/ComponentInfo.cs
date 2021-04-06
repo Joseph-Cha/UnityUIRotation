@@ -4,13 +4,11 @@ using UnityEngine.UI;
 using TMPro;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Linq;
-using System.Collections;
 
 [Serializable]
-public class PropertyNameValuePair
+public class PropertyKeyValuePair
 {
-    public string Name;
+    public string Key;
     public string Value;
 }
 
@@ -64,7 +62,7 @@ public class ComponentInfo
         }
     }
 #endregion
-    public List<PropertyNameValuePair> Properties = new List<PropertyNameValuePair>();
+    public List<PropertyKeyValuePair> Properties = new List<PropertyKeyValuePair>();
     private PropertyInfo GetPropertyInfo(string name, object target)
     {
         Type type = target?.GetType();
@@ -173,17 +171,17 @@ public class ComponentInfo
                     PropertyInfo info = GetPropertyInfo(propertyName, target);
                     if(info.PropertyType.IsPrimitive)
                     {
-                        Properties.Add(new PropertyNameValuePair
+                        Properties.Add(new PropertyKeyValuePair
                         {
-                            Name = propertyName, 
+                            Key = propertyName, 
                             Value = GetValueByPropertyName(propertyName, target).ToString()
                         });
                     }
                     else
                     {
-                        Properties.Add(new PropertyNameValuePair
+                        Properties.Add(new PropertyKeyValuePair
                         {
-                            Name = propertyName, 
+                            Key = propertyName, 
                             Value = JsonUtility.ToJson(GetValueByPropertyName(propertyName, target))
                         });
                     }
@@ -235,7 +233,7 @@ public class ComponentInfo
     {
         foreach(var property in Properties)
         {
-            PropertyInfo info = GetPropertyInfo(property.Name, target);//targetType.GetProperty(property.Key, BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo info = GetPropertyInfo(property.Key, target);//targetType.GetProperty(property.Key, BindingFlags.Public | BindingFlags.Instance);
             Type PropertyType = info?.PropertyType;
             object obj = null;
             if(PropertyType.IsPrimitive)
