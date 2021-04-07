@@ -20,19 +20,32 @@ public class ComponentProperty : MonoBehaviour
 {
     [SerializeField]
     private Transform Target;
-    List<Component> components = new List<Component>();
+    private List<Component> components = new List<Component>();
+    private ScreenOrientationState ScreenOrientationState = new ScreenOrientationState();
     private void Awake()
     {
         if (Target == null)
             Target = GetComponent<Transform>();
     }
+    private void OnEnable() => UIPropertyManager.Instance.OnLoadEventHandler += Load;
 
-    [ContextMenu("Save")]
+#if UNITY_EDITOR
+    [MenuItem("ComponentProperty/Save #s")] 
+    static public void OnSaveMenu()
+    {
+        if(!Selection.activeGameObject)
+            return;     
+        var ComponentProperty = Selection.activeGameObject.GetComponent<ComponentProperty>();
+        ComponentProperty.Save();
+    }
+#endif
+
+    // [ContextMenu("Save")]
     public void Save()
     {
         CreateJsonDirectory();
         
-        if(components == null)
+        if(components == null || components.Count == 0)
         {
             components = 
                 Target.GetComponentsInChildren<Component>(true).
@@ -61,7 +74,8 @@ public class ComponentProperty : MonoBehaviour
     private void Save(IEnumerable<Component> components)
     {
         // Arrage components data
-        string path =  $"{Application.dataPath}/Resources/{GetPathByOrientation()}/{Target.name}.json";
+        string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
+        string path =  $"{Application.dataPath}/Resources/{currentOrientation/*GetPathByOrientation()*/}/{Target.name}.json";
         string jsonData = string.Empty;
         ComponentStore componentStore = new ComponentStore();
         components.ToList().ForEach(component => componentStore.Data.Add(new ComponentInfo(component)));
@@ -69,29 +83,28 @@ public class ComponentProperty : MonoBehaviour
         // Convert components data to json
         try
         {
-            jsonData = JsonUtility.ToJson(componentStore);
+            jsonData = JsonUtility.ToJson(componentStore, true);
         }
         catch(Exception e)
         {
             Debug.LogError(e.Message);
             return;
         }
-        
+           
         // Save a json file to Resources folder
          if(File.Exists(path))
             File.Delete(path);
         File.WriteAllText(path, jsonData);
         #if UNITY_EDITOR
-        var relativePath = $"Assets/Resources/{GetPathByOrientation()}/{Target.name}.json";
+        var relativePath = $"Assets/Resources/{currentOrientation}/{Target.name}.json";
         AssetDatabase.ImportAsset(relativePath);
         #endif
-        Debug.Log($"Save Complete.\nCurrent Orientaion : {CurrentOrientaion()}, File Name : {Target.name}.json" );
+        Debug.Log($"Save Complete.\nFile Location : {path}");
     }
 
-    [ContextMenu("Load")]    
+    // [ContextMenu("Load")]    
     public void Load()
     {
-        // List<Component> components = Target.GetComponentsInChildren<Component>(true).Where(component => component.CompareTag("UIProperty")).ToList();
         if(components == null)
         {
             components = 
@@ -99,9 +112,9 @@ public class ComponentProperty : MonoBehaviour
                 Where(component => component.CompareTag("UIProperty")).
                 Where(component => SelectByComponentType(component)).ToList();
         }
-
+        string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
         TextAsset jsonFile;
-        string resourcePath = $"{GetPathByOrientation()}/{Target.name}";
+        string resourcePath = $"{currentOrientation}/{Target.name}";
         jsonFile = Resources.Load<TextAsset>(resourcePath);
 
         if(jsonFile == null)
@@ -127,61 +140,11 @@ public class ComponentProperty : MonoBehaviour
         Debug.Log("Load complete");
     }
 
-    private string GetPathByOrientation()
-    {
-        ScreenOrientation type = CurrentOrientaion();
-        string path;
-        
-        switch (type)
-        {
-            case ScreenOrientation.Portrait:
-                path = $"JsonData/Portrait";
-                break;
-            case ScreenOrientation.Landscape:
-                path = $"JsonData/Landscape";
-                break;
-            default:
-                return null;
-        }
-
-        return path;
-    }
-
-    private ScreenOrientation CurrentOrientaion()
-    {
-        ScreenOrientation type;
-
-        #if UNITY_EDITOR
-        Vector2 gameView = GetMainGameViewSize();        
-        float screenWidth = gameView.x;
-        float screenHeight = gameView.y;
-
-        if(screenHeight > screenWidth)
-            type = ScreenOrientation.Portrait;
-        else
-            type  = ScreenOrientation.Landscape;        
-
-        # else
-        type = Screen.orientation;
-        #endif
-
-        return type;
-    }
-
-    private Vector2 GetMainGameViewSize()
-    {
-        Type T = System.Type.GetType("UnityEditor.GameView,UnityEditor");
-        MethodInfo GetSizeOfMainGameView = 
-            T?.GetMethod("GetSizeOfMainGameView",System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-        var SizeOfMainGameView = GetSizeOfMainGameView?.Invoke(null,null);
-
-        return (Vector2)SizeOfMainGameView;
-    }
-
     private void CreateJsonDirectory()
     {
-        string path = $"{Application.dataPath}/Resources/{GetPathByOrientation()}";
+        string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
+        string path = $"{Application.dataPath}/Resources/{currentOrientation}";
         if(!File.Exists(path))
             Directory.CreateDirectory(path);
-    }    
+    }
 }

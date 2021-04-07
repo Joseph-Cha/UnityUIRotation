@@ -1,7 +1,9 @@
 {
-    "Data": [
+    "Data": 
+    [
         {
-            "Properties": [
+            "Properties": 
+            [
                 {
                     "Key": "sizeDelta",
                     "Value": "{\"x\":200.0,\"y\":200.0}"

@@ -8,8 +8,13 @@ using System.Collections.Generic;
 [Serializable]
 public class PropertyKeyValuePair
 {
-    public string Key;
-    public string Value;
+    public PropertyKeyValuePair(string key, string value)
+    {
+        Key = key;
+        Value = value;
+    }
+    public string Key { get; set; }
+    public string Value { get; set; }
 }
 
 // 하나의 Root Transform에서 가지고 있는 components들의 속성 정보를 저장
@@ -139,23 +144,10 @@ public class ComponentInfo
         nameof(ScrollRect.inertia),
         nameof(ScrollRect.decelerationRate),
         nameof(ScrollRect.scrollSensitivity),
-        // nameof(ScrollRect.horizontalScrollbar),
-        // nameof(ScrollRect.verticalScrollbar),
         nameof(ScrollRect.horizontalScrollbarVisibility),
         nameof(ScrollRect.verticalScrollbarVisibility),
         nameof(ScrollRect.horizontalScrollbarSpacing),
         nameof(ScrollRect.verticalScrollbarSpacing),
-        // nameof(ScrollRect.onValueChanged),
-        // nameof(ScrollRect.velocity),
-        // nameof(ScrollRect.normalizedPosition),
-        // nameof(ScrollRect.horizontalNormalizedPosition),
-        // nameof(ScrollRect.verticalNormalizedPosition),
-        // nameof(ScrollRect.minWidth),
-        // nameof(ScrollRect.preferredWidth),
-        // nameof(ScrollRect.flexibleWidth),
-        // nameof(ScrollRect.minHeight),
-        // nameof(ScrollRect.preferredHeight),
-        // nameof(ScrollRect.flexibleHeight)
     };
 #endregion    
     
@@ -171,19 +163,13 @@ public class ComponentInfo
                     PropertyInfo info = GetPropertyInfo(propertyName, target);
                     if(info.PropertyType.IsPrimitive)
                     {
-                        Properties.Add(new PropertyKeyValuePair
-                        {
-                            Key = propertyName, 
-                            Value = GetValueByPropertyName(propertyName, target).ToString()
-                        });
+                        Properties.Add(new PropertyKeyValuePair(
+                            propertyName, GetValueByPropertyName(propertyName, target).ToString()));
                     }
                     else
                     {
-                        Properties.Add(new PropertyKeyValuePair
-                        {
-                            Key = propertyName, 
-                            Value = JsonUtility.ToJson(GetValueByPropertyName(propertyName, target))
-                        });
+                        Properties.Add(new PropertyKeyValuePair(
+                            propertyName, JsonUtility.ToJson(GetValueByPropertyName(propertyName, target))));
                     }
                 }
                 catch(Exception e)
@@ -208,22 +194,12 @@ public class ComponentInfo
         switch(component)
         {
             case RectTransform rectTransform:
-                SetValueByTarget(rectTransform);
-                break;
             case LayoutElement layoutElement:
-                SetValueByTarget(layoutElement);
-                break;
             case VerticalLayoutGroup verticalLayoutGroup:
-                SetValueByTarget(verticalLayoutGroup);
-                break;
             case GridLayoutGroup gridLayoutGroup:
-                SetValueByTarget(gridLayoutGroup);
-                break;
             case TMP_Text text:
-                SetValueByTarget(text);
-                break;
             case ScrollRect scrollRect:
-                SetValueByTarget(scrollRect);
+                SetValueByTarget(component);
                 break;
             default:
                 break;
@@ -233,7 +209,7 @@ public class ComponentInfo
     {
         foreach(var property in Properties)
         {
-            PropertyInfo info = GetPropertyInfo(property.Key, target);//targetType.GetProperty(property.Key, BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo info = GetPropertyInfo(property.Key, target);
             Type PropertyType = info?.PropertyType;
             object obj = null;
             if(PropertyType.IsPrimitive)

@@ -1,0 +1,182 @@
+
+{
+    "ID": "Root",
+    "children": {
+        "ID": [
+            "GameObject Name 1",
+            "GameObject Name 2"
+        ],
+        "Value": [
+            {
+                "ID": "GameObject Name 1",
+                "children": {
+                    "ID": [
+                        "Component 1",
+                        "Component 2"
+                    ],
+                    "Value": [
+                        {
+                            "ID": "Component 1",
+                            "children": {
+                                "ID": [
+                                    "Porperty 1",
+                                    "Porperty 2",
+                                    "Porperty 3"
+                                ],
+                                "Value": [
+                                    {
+                                        "ID": "Porperty 1",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 2",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 3",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "ID": "Component 2",
+                            "children": {
+                                "ID": [
+                                    "Porperty 1",
+                                    "Porperty 2",
+                                    "Porperty 3",
+                                    "Porperty 4"
+                                ],
+                                "Value": [
+                                    {
+                                        "ID": "Porperty 1",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 2",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 3",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 4",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "ID": "GameObject Name 2",
+                "children": {
+                    "ID": [
+                        "Component 1",
+                        "Component 2"
+                    ],
+                    "Value": [
+                        {
+                            "ID": "Component 1",
+                            "children": {
+                                "ID": [
+                                    "Porperty 1",
+                                    "Porperty 2",
+                                    "Porperty 3"
+                                ],
+                                "Value": [
+                                    {
+                                        "ID": "Porperty 1",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 2",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 3",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "ID": "Component 2",
+                            "children": {
+                                "ID": [
+                                    "Porperty 1",
+                                    "Porperty 2",
+                                    "Porperty 3",
+                                    "Porperty 4"
+                                ],
+                                "Value": [
+                                    {
+                                        "ID": "Porperty 1",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 2",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 3",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    },
+                                    {
+                                        "ID": "Porperty 4",
+                                        "children": {
+                                            "ID": [],
+                                            "Value": []
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
