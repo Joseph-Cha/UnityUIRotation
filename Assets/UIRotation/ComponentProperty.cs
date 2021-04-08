@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
@@ -18,8 +17,7 @@ enum ComponentType
 
 public class ComponentProperty : MonoBehaviour
 {
-    [SerializeField]
-    private Transform Target;
+    public Transform Target;
     private List<Component> components = new List<Component>();
     private ScreenOrientationState ScreenOrientationState = new ScreenOrientationState();
     private void Awake()
@@ -30,7 +28,7 @@ public class ComponentProperty : MonoBehaviour
     private void OnEnable() => UIPropertyManager.Instance.OnLoadEventHandler += Load;
 
 #if UNITY_EDITOR
-    [MenuItem("ComponentProperty/Save #s")] 
+    [MenuItem("ComponentProperty/Save #s")]
     static public void OnSaveMenu()
     {
         if(!Selection.activeGameObject)
@@ -44,6 +42,7 @@ public class ComponentProperty : MonoBehaviour
     public void Save()
     {
         CreateJsonDirectory();
+
         
         if(components == null || components.Count == 0)
         {
@@ -59,18 +58,6 @@ public class ComponentProperty : MonoBehaviour
             Debug.LogError("There are no Components tagged \"UIProperty\" in the target");        
     }
 
-    private bool SelectByComponentType(Component component)
-    {
-        Type componetType = component.GetType();
-        string name = componetType?.Name;
-        foreach(var type in Enum.GetValues(typeof(ComponentType)))
-        {
-            if (name.Equals(type?.ToString()))
-                return true;
-        }
-        return false;
-    }
-
     private void Save(IEnumerable<Component> components)
     {
         // Arrage components data
@@ -78,7 +65,7 @@ public class ComponentProperty : MonoBehaviour
         string path =  $"{Application.dataPath}/Resources/{currentOrientation/*GetPathByOrientation()*/}/{Target.name}.json";
         string jsonData = string.Empty;
         ComponentStore componentStore = new ComponentStore();
-        components.ToList().ForEach(component => componentStore.Data.Add(new ComponentInfo(component)));
+        // components.ToList().ForEach(component => componentStore.Data.Add(new ComponentInfo(component)));
 
         // Convert components data to json
         try
@@ -92,8 +79,6 @@ public class ComponentProperty : MonoBehaviour
         }
            
         // Save a json file to Resources folder
-         if(File.Exists(path))
-            File.Delete(path);
         File.WriteAllText(path, jsonData);
         #if UNITY_EDITOR
         var relativePath = $"Assets/Resources/{currentOrientation}/{Target.name}.json";
@@ -101,7 +86,17 @@ public class ComponentProperty : MonoBehaviour
         #endif
         Debug.Log($"Save Complete.\nFile Location : {path}");
     }
-
+    private bool SelectByComponentType(Component component)
+    {
+        Type componetType = component.GetType();
+        string name = componetType?.Name;
+        foreach(var type in Enum.GetValues(typeof(ComponentType)))
+        {
+            if (name.Equals(type?.ToString()))
+                return true;
+        }
+        return false;
+    }
     // [ContextMenu("Load")]    
     public void Load()
     {
@@ -128,7 +123,7 @@ public class ComponentProperty : MonoBehaviour
             var store = JsonUtility.FromJson<ComponentStore>(jsonFile.text);
             for (int i = 0; i < components.Count(); i++)
             {
-                store.Data[i].SetPropertyValueByComponent(components[i]);
+                // store.Data[i].SetPropertyValueByComponent(components[i]);
             }
         }
         catch(Exception e)

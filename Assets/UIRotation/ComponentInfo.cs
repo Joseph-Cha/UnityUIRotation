@@ -6,25 +6,32 @@ using System.Reflection;
 using System.Collections.Generic;
 
 [Serializable]
-public class PropertyKeyValuePair
+public class PropertyNameValuePair
 {
-    public PropertyKeyValuePair(string key, string value)
+    public PropertyNameValuePair(string _key, string _value)
     {
-        Key = key;
-        Value = value;
+        Key = _key;
+        Value = _value;
     }
-    public string Key { get; set; }
-    public string Value { get; set; }
+    
+    public string Key;
+    public string Value;
 }
 
 // 하나의 Root Transform에서 가지고 있는 components들의 속성 정보를 저장
 [Serializable]
 public class ComponentInfo
 {
+    [SerializeField]
+    public string Name;
+    [SerializeField]
+    public List<PropertyNameValuePair> Properties = new List<PropertyNameValuePair>();
+
 #region ComponentInfo ctor
-    public ComponentInfo(Component component)
+    public ComponentInfo(string _name, Component _component)
     {
-        switch(component)
+        Name = _name;
+        switch(_component)
         {
             case RectTransform rectTransform:
                 AddSerializeData(rectTransformPropertyNames, rectTransform);
@@ -67,7 +74,6 @@ public class ComponentInfo
         }
     }
 #endregion
-    public List<PropertyKeyValuePair> Properties = new List<PropertyKeyValuePair>();
     private PropertyInfo GetPropertyInfo(string name, object target)
     {
         Type type = target?.GetType();
@@ -163,12 +169,12 @@ public class ComponentInfo
                     PropertyInfo info = GetPropertyInfo(propertyName, target);
                     if(info.PropertyType.IsPrimitive)
                     {
-                        Properties.Add(new PropertyKeyValuePair(
+                        Properties.Add(new PropertyNameValuePair(
                             propertyName, GetValueByPropertyName(propertyName, target).ToString()));
                     }
                     else
                     {
-                        Properties.Add(new PropertyKeyValuePair(
+                        Properties.Add(new PropertyNameValuePair(
                             propertyName, JsonUtility.ToJson(GetValueByPropertyName(propertyName, target))));
                     }
                 }
