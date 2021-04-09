@@ -22,9 +22,7 @@ public class PropertyNameValuePair
 [Serializable]
 public class ComponentInfo
 {
-    [SerializeField]
     public string Name;
-    [SerializeField]
     public List<PropertyNameValuePair> Properties = new List<PropertyNameValuePair>();
 
 #region ComponentInfo ctor

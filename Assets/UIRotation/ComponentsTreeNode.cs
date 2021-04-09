@@ -3,9 +3,9 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class ComponentsTreeNode
+public class ComponentsNode
 {
-    public ComponentsTreeNode(string _name)
+    public ComponentsNode(string _name)
     {
         Name = _name;
     }
@@ -13,5 +13,5 @@ public class ComponentsTreeNode
     [SerializeField]
     public List<ComponentInfo> ComponentInfos = new List<ComponentInfo>();
     [SerializeField]
-    public List<ComponentsTreeNode> Children = new List<ComponentsTreeNode>();  
+    public List<ComponentsNode> Children = new List<ComponentsNode>();  
 }

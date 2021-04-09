@@ -9,46 +9,50 @@ using UnityEditor;
 public class TestClass : MonoBehaviour
 {
     public Transform Root;
+    private ComponentsNode Node = null;
     private ScreenOrientationState ScreenOrientationState = new ScreenOrientationState();
 
     [ContextMenu("Test")]
     public void Test()
     {
+        Node = new ComponentsNode(Root.name);
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
-        string path =  $"{Application.dataPath}/Resources/{currentOrientation/*GetPathByOrientation()*/}/{Root.name}.json";
+        string path =  $"{Application.dataPath}/Resources/{currentOrientation}/{Root.name}.json";
 
-        ComponentsTreeNode Node = new ComponentsTreeNode(Root.name);
-
-        IEnumerable<Component> coms = Root.GetComponents<Component>().Where(component => SelectByComponentType(component));
-        foreach(var component in coms)
+        Transform currentParent = Root;
+        ComponentsNode currentNode = Node;
+        Queue<Transform> childTransforms = new Queue<Transform>();
+        Queue<ComponentsNode> ComponentsNodes = new Queue<ComponentsNode>();
+        while(true)
         {
-            Type componetType = component.GetType();
-            string name = componetType?.Name;
-            Node.ComponentInfos.Add(new ComponentInfo(name, component));
+            foreach(Transform child in currentParent)
+            {
+                SetComponentInfoToNode(currentNode, child);
+                childTransforms.Enqueue(child);
+            }
+            foreach(ComponentsNode child in currentNode.Children)
+            {
+                ComponentsNodes.Enqueue(child);
+            }
+            
+            // try
+            // {
+            //     currentParent = childTransforms.Dequeue();
+            //     currentNode = ComponentsNodes.Dequeue();
+            // }
+            // catch
+            // {
+            //     break;
+            // }
+            if(childTransforms.Count != 0 || ComponentsNodes.Count != 0)
+            {
+                currentParent = childTransforms.Dequeue();
+                currentNode = ComponentsNodes.Dequeue();
+            }
+            else
+                break;
         }
 
-        
-        SetTreeNode(Root, Node);
-
-        // // current를 그때 그때 수정하자
-        // // https://en.wikipedia.org/wiki/Search_tree#Iterative
-        // IEnumerator list = Root.GetEnumerator();
-        // while(list.MoveNext())
-        // {
-        //     Transform transform = list.Current as Transform;
-        //     Node.Children.Add(new ComponentsTreeNode(transform.name));
-        //     foreach(var node in Node.Children)
-        //     {
-        //         IEnumerable<Component> components = transform.GetComponents<Component>().
-        //             Where(component => SelectByComponentType(component));
-        //         foreach(var component in components)
-        //         {
-        //             Type componetType = component.GetType();
-        //             string name = componetType?.Name;
-        //             node.ComponentInfos.Add(new ComponentInfo(name, component));
-        //         }
-        //     }
-        // }
         string jsonData = JsonUtility.ToJson(Node, true);
 
         File.WriteAllText(path, jsonData);
@@ -57,55 +61,28 @@ public class TestClass : MonoBehaviour
         AssetDatabase.ImportAsset(relativePath);
         #endif
         Debug.Log($"Save Complete.\nFile Location : {path}");
-
     }
-    private void SetTreeNode(Transform _root, ComponentsTreeNode _node)
+
+
+    private void SetComponentInfoToNode(ComponentsNode _node, Transform target)
     {
-        Transform currentTransform = _root;
-        while(currentTransform.childCount != 0)
+        // 타겟의 이름으로 노드 생성
+        ComponentsNode childNode = new ComponentsNode(target.name);
+        
+        // 노드에 타겟의 컴포넌트 정보 입력
+        IEnumerable<Component> components = target.GetComponents<Component>().Where(component => SelectByComponentType(component));
+        foreach(var component in components)
         {
-            // IEnumerable<Component> coms = currentTransform.GetComponents<Component>().Where(component => SelectByComponentType(component));
-            // foreach(var component in coms)
-            // {
-            //     Type componetType = component.GetType();
-            //     string name = componetType?.Name;
-            //     _node.ComponentInfos.Add(new ComponentInfo(name, component));
-            // }
-
-            // currentTransform = 
-
-            IEnumerator list = currentTransform.GetEnumerator();
-            while(list.MoveNext())
-            {
-                currentTransform = list.Current as Transform;
-
-                
-                _node.Children.Add(new ComponentsTreeNode(currentTransform.name));
-
-                foreach(var node in _node.Children)
-                {
-                    IEnumerable<Component> components = currentTransform.GetComponents<Component>().Where(component => SelectByComponentType(component));
-                    foreach(var component in components)
-                    {
-                        Type componetType = component.GetType();
-                        string name = componetType?.Name;
-                        node.ComponentInfos.Add(new ComponentInfo(name, component));
-                    }
-                }
-            }
-
-            // IEnumerable<Component> coms = currentTransform.GetComponents<Component>().Where(component => SelectByComponentType(component));
-            // foreach(var component in coms)
-            // {
-            //     Type componetType = component.GetType();
-            //     string name = componetType?.Name;
-            //     _node.ComponentInfos.Add(new ComponentInfo(name, component));
-            // }
+            Type componetType = component.GetType();
+            string name = componetType?.Name;
+            childNode.ComponentInfos.Add(new ComponentInfo(name, component));
         }
 
-
+        // 부모 노드에 타겟 노드를 연결
+        _node.Children.Add(childNode);
     }
 
+    
     private bool SelectByComponentType(Component component)
     {
         Type componetType = component.GetType();
