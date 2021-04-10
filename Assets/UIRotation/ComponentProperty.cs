@@ -41,15 +41,15 @@ public class ComponentProperty : MonoBehaviour
 
     private void Save()
     {
-        ComponentsNode Node = new ComponentsNode(Root.name);
+        var node = new ComponentsNode(Root.name);
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
         string path =  $"{Application.dataPath}/Resources/{currentOrientation}/{Root.name}.json";
         string jsonData = string.Empty;
         
         Transform currentParent = Root;
-        ComponentsNode currentNode = Node;
-        Queue<Transform> childTransforms = new Queue<Transform>();
-        Queue<ComponentsNode> componentsNodes = new Queue<ComponentsNode>();
+        ComponentsNode currentNode = node;
+        var childTransforms = new Queue<Transform>();
+        var componentsNodes = new Queue<ComponentsNode>();
 
         while(true)
         {
@@ -71,7 +71,7 @@ public class ComponentProperty : MonoBehaviour
         // Convert components data to json
         try
         {
-            jsonData = JsonUtility.ToJson(Node, true);
+            jsonData = JsonUtility.ToJson(node, true);
         }
         catch(Exception e)
         {
@@ -88,7 +88,7 @@ public class ComponentProperty : MonoBehaviour
         Debug.Log($"Save Complete.\nFile Location : {path}");
     }
 
-    private void SetComponentInfoToNode(ComponentsNode _node, Transform target)
+    private void SetComponentInfoToNode(ComponentsNode node, Transform target)
     {
         // 타겟의 이름으로 노드 생성
         ComponentsNode childNode = new ComponentsNode(target.name);
@@ -103,7 +103,7 @@ public class ComponentProperty : MonoBehaviour
         }
 
         // 부모 노드에 타겟 노드를 연결
-        _node.Children.Add(childNode);
+        node.Children.Add(childNode);
     }
     
     private bool SelectByComponentType(Component component)
@@ -117,18 +117,10 @@ public class ComponentProperty : MonoBehaviour
         }
         return false;
     }
-    // [ContextMenu("Load")]    
+    [ContextMenu("Load")]    
     public void Load()
     {
-        List<Component> components = new List<Component>();
-
-        if(components == null)
-        {
-            components = 
-                Root.GetComponentsInChildren<Component>(true).
-                Where(component => component.CompareTag("UIProperty")).
-                Where(component => SelectByComponentType(component)).ToList();
-        }
+        ComponentsNode node = null;
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
         TextAsset jsonFile;
         string resourcePath = $"{currentOrientation}/{Root.name}";
@@ -142,11 +134,7 @@ public class ComponentProperty : MonoBehaviour
 
         try
         {
-            var store = JsonUtility.FromJson<ComponentStore>(jsonFile.text);
-            for (int i = 0; i < components.Count(); i++)
-            {
-                // store.Data[i].SetPropertyValueByComponent(components[i]);
-            }
+            node = JsonUtility.FromJson<ComponentsNode>(jsonFile.text);
         }
         catch(Exception e)
         {         
@@ -154,8 +142,43 @@ public class ComponentProperty : MonoBehaviour
             return;
         }
 
+        Transform currentTransform = Root;
+        ComponentsNode currentNode = node;
+        var childTransforms = new Queue<Transform>();
+        var componentsNodes = new Queue<ComponentsNode>();
+
+        while(true)
+        {
+            foreach(Transform child in currentTransform)
+            {
+                childTransforms.Enqueue(child);
+            }
+            foreach(ComponentsNode child in currentNode.Children)
+            {
+                componentsNodes.Enqueue(child);
+            }
+            if(childTransforms.Count == 0 || componentsNodes.Count == 0)
+                break;
+            currentTransform = childTransforms.Dequeue();
+            currentNode = componentsNodes.Dequeue();
+            Test(currentNode, currentTransform);
+        }
+         
+
         Debug.Log("Load complete");
     }
+    
+    private void Test(ComponentsNode node, Transform target)
+    {   
+        int i = 0;
+        IEnumerable<Component> components = target.GetComponents<Component>().Where(component => SelectByComponentType(component));
+        foreach(var component in components)
+        {
+            node.ComponentInfos[i].SetPropertyValueByComponent(component);
+            i++;
+        }
+    }
+
 
     private void CreateJsonDirectory()
     {
