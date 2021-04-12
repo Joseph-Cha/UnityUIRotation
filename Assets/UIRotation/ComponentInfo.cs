@@ -8,13 +8,13 @@ using System.Collections.Generic;
 [Serializable]
 public class PropertyNameValuePair
 {
-    public PropertyNameValuePair(string _key, string _value)
+    public PropertyNameValuePair(string name, string value)
     {
-        Key = _key;
-        Value = _value;
+        this.Name = name;
+        this.Value = value;
     }
     
-    public string Key;
+    public string Name;
     public string Value;
 }
 
@@ -22,47 +22,48 @@ public class PropertyNameValuePair
 [Serializable]
 public class ComponentInfo
 {
+    ScrollRect df;
     public string Name;
     public List<PropertyNameValuePair> Properties = new List<PropertyNameValuePair>();
 
 #region ComponentInfo ctor
-    public ComponentInfo(string _name, Component _component)
+    public ComponentInfo(string name, Component component)
     {
-        Name = _name;
-        switch(_component)
+        this.Name = name;
+        switch(component)
         {
             case RectTransform rectTransform:
-                AddSerializeData(rectTransformPropertyNames, rectTransform);
+                AddPropertiesByPropertyNames(rectTransformPropertyNames, rectTransform);
                 // RectTransformInfos = rectTransform.GetType().GetProperties();
                 // RectTransformInfos.ToList().ForEach(info => Debug.Log($"RectTransformInfo Name : {info.Name}"));
                 break;
 
             case LayoutElement layoutElement:
-                AddSerializeData(layoutElementPropertyNames, layoutElement);
+                AddPropertiesByPropertyNames(layoutElementPropertyNames, layoutElement);
                 // LayoutElementInfos = layoutElement.GetType().GetProperties();
                 // LayoutElementInfos.ToList().ForEach(info => Debug.Log($"LayoutElement Info Name : {info.Name}"));
                 break;
 
             case VerticalLayoutGroup verticalLayoutGroup:
-                AddSerializeData(verticalLayoutGroupPropertyNames, verticalLayoutGroup);
+                AddPropertiesByPropertyNames(verticalLayoutGroupPropertyNames, verticalLayoutGroup);
                 // VerticalLayoutGroupInfos = verticalLayoutGroup.GetType().GetProperties();
                 // VerticalLayoutGroupInfos.ToList().ForEach(info => Debug.Log($"VerticalLayoutGroup Info Name : {info.Name}"));
                 break;
 
             case GridLayoutGroup gridLayoutGroup:
-                AddSerializeData(gridLayoutGroupPropertyNames, gridLayoutGroup);
+                AddPropertiesByPropertyNames(gridLayoutGroupPropertyNames, gridLayoutGroup);
                 // GridLayoutGroupInfos = gridLayoutGroup.GetType().GetProperties();
                 // GridLayoutGroupInfos.ToList().ForEach(info => Debug.Log($"GridLayoutGroupInfos Name : {info.Name}"));
                 break;
 
             case TMP_Text text:
-                AddSerializeData(tmp_TextPropertyNames, text);
+                AddPropertiesByPropertyNames(tmp_TextPropertyNames, text);
                 // TMPTextInfos = text.GetType().GetProperties();
                 // TMPTextInfos.ToList().ForEach(info => Debug.Log($"TMPTextInfos Name : {info.Name}"));
                 break;
 
             case ScrollRect scrollRect:
-                AddSerializeData(scrollRectPropertyNames, scrollRect);
+                AddPropertiesByPropertyNames(scrollRectPropertyNames, scrollRect);
                 // ScrollRectInfos = scrollRect.GetType().GetProperties();
                 // ScrollRectInfos.ToList().ForEach(info => Debug.Log($"ScrollRectInfos Name : {info.Name}"));
                 break;
@@ -156,7 +157,7 @@ public class ComponentInfo
 #endregion    
     
 #region Save Logic
-    private void AddSerializeData(string[] propertyNames, object target)
+    private void AddPropertiesByPropertyNames(string[] propertyNames, object target)
     {
         if(propertyNames != null || target != null)
         {
@@ -213,7 +214,7 @@ public class ComponentInfo
     {
         foreach(var property in Properties)
         {
-            PropertyInfo info = GetPropertyInfo(property.Key, target);
+            PropertyInfo info = GetPropertyInfo(property.Name, target);
             Type PropertyType = info?.PropertyType;
             object obj = null;
             if(PropertyType.IsPrimitive)

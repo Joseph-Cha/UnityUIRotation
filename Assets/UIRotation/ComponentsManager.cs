@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEditor;
 
-public class UIPropertyManager : MonoBehaviour
+public class ComponentsManager : MonoBehaviour
 {    
-    private static UIPropertyManager instance = null;
-    public static UIPropertyManager Instance
+    private static ComponentsManager instance = null;
+    public static ComponentsManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<UIPropertyManager>();
+                instance = FindObjectOfType<ComponentsManager>();
             }
             return instance;
         }
@@ -53,8 +53,8 @@ public class UIPropertyManager : MonoBehaviour
     {
         if(!Selection.activeGameObject)
             return;        
-        var UIPropertyManager = Selection.activeGameObject.GetComponent<UIPropertyManager>();
-        UIPropertyManager.OnLoadEventHandler();
+        var ComponentsManager = Selection.activeGameObject.GetComponent<ComponentsManager>();
+        ComponentsManager.OnLoadEventHandler();
     }
 #endif
 }

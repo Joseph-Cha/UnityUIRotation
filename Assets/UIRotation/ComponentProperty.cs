@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 enum ComponentType
 {
@@ -23,10 +24,10 @@ public class ComponentProperty : MonoBehaviour
     private void Awake()
     {
         if (Root == null)
-            Root = GetComponent<Transform>();
+            Root = transform;
     }
 
-    private void OnEnable() => UIPropertyManager.Instance.OnLoadEventHandler += Load;
+    private void OnEnable() => ComponentsManager.Instance.OnLoadEventHandler += Load;
 
 #if UNITY_EDITOR
     [MenuItem("ComponentProperty/Save #s")]
@@ -43,28 +44,25 @@ public class ComponentProperty : MonoBehaviour
     {
         var node = new ComponentsNode(Root.name);
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
-        string path =  $"{Application.dataPath}/Resources/{currentOrientation}/{Root.name}.json";
+        string path =  $"{Application.dataPath}/Resources/{currentOrientation}/{SceneManager.GetActiveScene().name}/{Root.name}.json";
         string jsonData = string.Empty;
         
-        Transform currentParent = Root;
+        Transform currentRoot = Root;
         ComponentsNode currentNode = node;
-        var childTransforms = new Queue<Transform>();
+        var transforms = new Queue<Transform>();
         var componentsNodes = new Queue<ComponentsNode>();
 
         while(true)
         {
-            foreach(Transform child in currentParent)
+            foreach(Transform childTransform in currentRoot)
             {
-                SetComponentInfoToNode(currentNode, child);
-                childTransforms.Enqueue(child);
+                ComponentsNode childNode = SetComponentInfoToNode(currentNode, childTransform);
+                transforms.Enqueue(childTransform);
+                componentsNodes.Enqueue(childNode);
             }
-            foreach(ComponentsNode child in currentNode.Children)
-            {
-                componentsNodes.Enqueue(child);
-            }
-            if(childTransforms.Count == 0 || componentsNodes.Count == 0)
+            if(transforms.Count == 0)
                 break;
-            currentParent = childTransforms.Dequeue();
+            currentRoot = transforms.Dequeue();
             currentNode = componentsNodes.Dequeue();
         }
 
@@ -78,23 +76,24 @@ public class ComponentProperty : MonoBehaviour
             Debug.LogError(e.Message);
             return;
         }
-           
+        
         // Save a json file to Resources folder
+        CreateJsonDirectory();
         File.WriteAllText(path, jsonData);
         #if UNITY_EDITOR
-        var relativePath = $"Assets/Resources/{currentOrientation}/{Root.name}.json";
+        var relativePath = $"Assets/Resources/{currentOrientation}/{SceneManager.GetActiveScene().name}/{Root.name}.json";
         AssetDatabase.ImportAsset(relativePath);
         #endif
         Debug.Log($"Save Complete.\nFile Location : {path}");
     }
 
-    private void SetComponentInfoToNode(ComponentsNode node, Transform target)
+    private ComponentsNode SetComponentInfoToNode(ComponentsNode parentNode, Transform childTransform)
     {
         // 타겟의 이름으로 노드 생성
-        ComponentsNode childNode = new ComponentsNode(target.name);
+        ComponentsNode childNode = new ComponentsNode(childTransform.name);
         
         // 노드에 타겟의 컴포넌트 정보 입력
-        IEnumerable<Component> components = target.GetComponents<Component>().Where(component => SelectByComponentType(component));
+        IEnumerable<Component> components = childTransform.GetComponents<Component>().Where(component => SelectByComponentType(component));
         foreach(var component in components)
         {
             Type componetType = component.GetType();
@@ -103,7 +102,9 @@ public class ComponentProperty : MonoBehaviour
         }
 
         // 부모 노드에 타겟 노드를 연결
-        node.Children.Add(childNode);
+        parentNode.Children.Add(childNode);
+
+        return childNode;
     }
     
     private bool SelectByComponentType(Component component)
@@ -123,7 +124,7 @@ public class ComponentProperty : MonoBehaviour
         ComponentsNode node = null;
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
         TextAsset jsonFile;
-        string resourcePath = $"{currentOrientation}/{Root.name}";
+        string resourcePath = $"{currentOrientation}/{SceneManager.GetActiveScene().name}/{Root.name}";
         jsonFile = Resources.Load<TextAsset>(resourcePath);
 
         if(jsonFile == null)
@@ -163,8 +164,7 @@ public class ComponentProperty : MonoBehaviour
             currentNode = componentsNodes.Dequeue();
             Test(currentNode, currentTransform);
         }
-         
-
+        
         Debug.Log("Load complete");
     }
     
@@ -183,7 +183,7 @@ public class ComponentProperty : MonoBehaviour
     private void CreateJsonDirectory()
     {
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
-        string path = $"{Application.dataPath}/Resources/{currentOrientation}";
+        string path = $"{Application.dataPath}/Resources/{currentOrientation}/{SceneManager.GetActiveScene().name}";
         if(!File.Exists(path))
             Directory.CreateDirectory(path);
     }
