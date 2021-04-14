@@ -1,0 +1,510 @@
+{
+    "Name": "Panel",
+    "ComponentInfos": [],
+    "Children": [
+        {
+            "Name": "Image",
+            "ComponentInfos": [
+                {
+                    "Name": "RectTransform",
+                    "Properties": [
+                        {
+                            "Name": "sizeDelta",
+                            "Value": "{\"x\":300.0,\"y\":300.0}"
+                        },
+                        {
+                            "Name": "pivot",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "anchorMin",
+                            "Value": "{\"x\":0.0,\"y\":1.0}"
+                        },
+                        {
+                            "Name": "anchorMax",
+                            "Value": "{\"x\":0.0,\"y\":1.0}"
+                        },
+                        {
+                            "Name": "localScale",
+                            "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                        },
+                        {
+                            "Name": "localPosition",
+                            "Value": "{\"x\":-465.0,\"y\":0.0,\"z\":0.0}"
+                        },
+                        {
+                            "Name": "localRotation",
+                            "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                        },
+                        {
+                            "Name": "anchoredPosition",
+                            "Value": "{\"x\":655.0,\"y\":-630.0}"
+                        }
+                    ]
+                },
+                {
+                    "Name": "LayoutElement",
+                    "Properties": [
+                        {
+                            "Name": "minWidth",
+                            "Value": "300"
+                        },
+                        {
+                            "Name": "minHeight",
+                            "Value": "-1"
+                        },
+                        {
+                            "Name": "preferredWidth",
+                            "Value": "-1"
+                        },
+                        {
+                            "Name": "preferredHeight",
+                            "Value": "-1"
+                        },
+                        {
+                            "Name": "flexibleWidth",
+                            "Value": "-1"
+                        },
+                        {
+                            "Name": "flexibleHeight",
+                            "Value": "-1"
+                        }
+                    ]
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Name": "Image (1)",
+            "ComponentInfos": [
+                {
+                    "Name": "RectTransform",
+                    "Properties": [
+                        {
+                            "Name": "sizeDelta",
+                            "Value": "{\"x\":300.0,\"y\":300.0}"
+                        },
+                        {
+                            "Name": "pivot",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "anchorMin",
+                            "Value": "{\"x\":0.0,\"y\":1.0}"
+                        },
+                        {
+                            "Name": "anchorMax",
+                            "Value": "{\"x\":0.0,\"y\":1.0}"
+                        },
+                        {
+                            "Name": "localScale",
+                            "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                        },
+                        {
+                            "Name": "localPosition",
+                            "Value": "{\"x\":-155.0,\"y\":0.0,\"z\":0.0}"
+                        },
+                        {
+                            "Name": "localRotation",
+                            "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                        },
+                        {
+                            "Name": "anchoredPosition",
+                            "Value": "{\"x\":965.0,\"y\":-630.0}"
+                        }
+                    ]
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Name": "Image (2)",
+            "ComponentInfos": [
+                {
+                    "Name": "RectTransform",
+                    "Properties": [
+                        {
+                            "Name": "sizeDelta",
+                            "Value": "{\"x\":300.0,\"y\":300.0}"
+                        },
+                        {
+                            "Name": "pivot",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "anchorMin",
+                            "Value": "{\"x\":0.0,\"y\":1.0}"
+                        },
+                        {
+                            "Name": "anchorMax",
+                            "Value": "{\"x\":0.0,\"y\":1.0}"
+                        },
+                        {
+                            "Name": "localScale",
+                            "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                        },
+                        {
+                            "Name": "localPosition",
+                            "Value": "{\"x\":155.0,\"y\":0.0,\"z\":0.0}"
+                        },
+                        {
+                            "Name": "localRotation",
+                            "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                        },
+                        {
+                            "Name": "anchoredPosition",
+                            "Value": "{\"x\":1275.0,\"y\":-630.0}"
+                        }
+                    ]
+                }
+            ],
+            "Children": [
+                {
+                    "Name": "Image (3)",
+                    "ComponentInfos": [
+                        {
+                            "Name": "RectTransform",
+                            "Properties": [
+                                {
+                                    "Name": "sizeDelta",
+                                    "Value": "{\"x\":300.0,\"y\":300.0}"
+                                },
+                                {
+                                    "Name": "pivot",
+                                    "Value": "{\"x\":0.5,\"y\":0.5}"
+                                },
+                                {
+                                    "Name": "anchorMin",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "anchorMax",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "localScale",
+                                    "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                                },
+                                {
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
+                                },
+                                {
+                                    "Name": "localRotation",
+                                    "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                                },
+                                {
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":460.0,\"y\":-150.0}"
+                                }
+                            ]
+                        }
+                    ],
+                    "Children": []
+                },
+                {
+                    "Name": "Image (4)",
+                    "ComponentInfos": [
+                        {
+                            "Name": "RectTransform",
+                            "Properties": [
+                                {
+                                    "Name": "sizeDelta",
+                                    "Value": "{\"x\":300.0,\"y\":300.0}"
+                                },
+                                {
+                                    "Name": "pivot",
+                                    "Value": "{\"x\":0.5,\"y\":0.5}"
+                                },
+                                {
+                                    "Name": "anchorMin",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "anchorMax",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "localScale",
+                                    "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                                },
+                                {
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
+                                },
+                                {
+                                    "Name": "localRotation",
+                                    "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                                },
+                                {
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":460.0,\"y\":-150.0}"
+                                }
+                            ]
+                        }
+                    ],
+                    "Children": []
+                },
+                {
+                    "Name": "Image (5)",
+                    "ComponentInfos": [
+                        {
+                            "Name": "RectTransform",
+                            "Properties": [
+                                {
+                                    "Name": "sizeDelta",
+                                    "Value": "{\"x\":300.0,\"y\":300.0}"
+                                },
+                                {
+                                    "Name": "pivot",
+                                    "Value": "{\"x\":0.5,\"y\":0.5}"
+                                },
+                                {
+                                    "Name": "anchorMin",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "anchorMax",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "localScale",
+                                    "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                                },
+                                {
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
+                                },
+                                {
+                                    "Name": "localRotation",
+                                    "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                                },
+                                {
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":460.0,\"y\":-150.0}"
+                                }
+                            ]
+                        }
+                    ],
+                    "Children": []
+                },
+                {
+                    "Name": "Image (6)",
+                    "ComponentInfos": [
+                        {
+                            "Name": "RectTransform",
+                            "Properties": [
+                                {
+                                    "Name": "sizeDelta",
+                                    "Value": "{\"x\":300.0,\"y\":300.0}"
+                                },
+                                {
+                                    "Name": "pivot",
+                                    "Value": "{\"x\":0.5,\"y\":0.5}"
+                                },
+                                {
+                                    "Name": "anchorMin",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "anchorMax",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "localScale",
+                                    "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                                },
+                                {
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
+                                },
+                                {
+                                    "Name": "localRotation",
+                                    "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                                },
+                                {
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":460.0,\"y\":-150.0}"
+                                }
+                            ]
+                        }
+                    ],
+                    "Children": []
+                },
+                {
+                    "Name": "Image (7)",
+                    "ComponentInfos": [
+                        {
+                            "Name": "RectTransform",
+                            "Properties": [
+                                {
+                                    "Name": "sizeDelta",
+                                    "Value": "{\"x\":300.0,\"y\":300.0}"
+                                },
+                                {
+                                    "Name": "pivot",
+                                    "Value": "{\"x\":0.5,\"y\":0.5}"
+                                },
+                                {
+                                    "Name": "anchorMin",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "anchorMax",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "localScale",
+                                    "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                                },
+                                {
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
+                                },
+                                {
+                                    "Name": "localRotation",
+                                    "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                                },
+                                {
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":460.0,\"y\":-150.0}"
+                                }
+                            ]
+                        }
+                    ],
+                    "Children": []
+                }
+            ]
+        },
+        {
+            "Name": "Image (3)",
+            "ComponentInfos": [
+                {
+                    "Name": "RectTransform",
+                    "Properties": [
+                        {
+                            "Name": "sizeDelta",
+                            "Value": "{\"x\":300.0,\"y\":300.0}"
+                        },
+                        {
+                            "Name": "pivot",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "anchorMin",
+                            "Value": "{\"x\":0.0,\"y\":1.0}"
+                        },
+                        {
+                            "Name": "anchorMax",
+                            "Value": "{\"x\":0.0,\"y\":1.0}"
+                        },
+                        {
+                            "Name": "localScale",
+                            "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                        },
+                        {
+                            "Name": "localPosition",
+                            "Value": "{\"x\":465.0,\"y\":0.0,\"z\":0.0}"
+                        },
+                        {
+                            "Name": "localRotation",
+                            "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                        },
+                        {
+                            "Name": "anchoredPosition",
+                            "Value": "{\"x\":1585.0,\"y\":-630.0}"
+                        }
+                    ]
+                }
+            ],
+            "Children": [
+                {
+                    "Name": "Image (3)",
+                    "ComponentInfos": [
+                        {
+                            "Name": "RectTransform",
+                            "Properties": [
+                                {
+                                    "Name": "sizeDelta",
+                                    "Value": "{\"x\":300.0,\"y\":300.0}"
+                                },
+                                {
+                                    "Name": "pivot",
+                                    "Value": "{\"x\":0.5,\"y\":0.5}"
+                                },
+                                {
+                                    "Name": "anchorMin",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "anchorMax",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "localScale",
+                                    "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                                },
+                                {
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
+                                },
+                                {
+                                    "Name": "localRotation",
+                                    "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                                },
+                                {
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":460.0,\"y\":-150.0}"
+                                }
+                            ]
+                        }
+                    ],
+                    "Children": []
+                },
+                {
+                    "Name": "Image (4)",
+                    "ComponentInfos": [
+                        {
+                            "Name": "RectTransform",
+                            "Properties": [
+                                {
+                                    "Name": "sizeDelta",
+                                    "Value": "{\"x\":300.0,\"y\":300.0}"
+                                },
+                                {
+                                    "Name": "pivot",
+                                    "Value": "{\"x\":0.5,\"y\":0.5}"
+                                },
+                                {
+                                    "Name": "anchorMin",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "anchorMax",
+                                    "Value": "{\"x\":0.0,\"y\":1.0}"
+                                },
+                                {
+                                    "Name": "localScale",
+                                    "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                                },
+                                {
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
+                                },
+                                {
+                                    "Name": "localRotation",
+                                    "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                                },
+                                {
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":460.0,\"y\":-150.0}"
+                                }
+                            ]
+                        }
+                    ],
+                    "Children": []
+                }
+            ]
+        }
+    ]
+}

@@ -3,41 +3,145 @@
     "ComponentInfos": [],
     "Children": [
         {
+            "Name": "Text (TMP)",
+            "ComponentInfos": [
+                {
+                    "Name": "RectTransform",
+                    "Properties": [
+                        {
+                            "Name": "sizeDelta",
+                            "Value": "{\"x\":200.0,\"y\":50.0}"
+                        },
+                        {
+                            "Name": "pivot",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "anchorMin",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "anchorMax",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "localScale",
+                            "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                        },
+                        {
+                            "Name": "localPosition",
+                            "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0}"
+                        },
+                        {
+                            "Name": "localRotation",
+                            "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                        },
+                        {
+                            "Name": "anchoredPosition",
+                            "Value": "{\"x\":0.0,\"y\":0.0}"
+                        }
+                    ]
+                },
+                {
+                    "Name": "TextMeshProUGUI",
+                    "Properties": [
+                        {
+                            "Name": "alignment",
+                            "Value": "{\"value__\":257}"
+                        },
+                        {
+                            "Name": "horizontalAlignment",
+                            "Value": "{\"value__\":1}"
+                        },
+                        {
+                            "Name": "verticalAlignment",
+                            "Value": "{\"value__\":256}"
+                        },
+                        {
+                            "Name": "autoSizeTextContainer",
+                            "Value": "False"
+                        },
+                        {
+                            "Name": "fontSize",
+                            "Value": "36"
+                        },
+                        {
+                            "Name": "fontSizeMin",
+                            "Value": "18"
+                        },
+                        {
+                            "Name": "fontSizeMax",
+                            "Value": "72"
+                        },
+                        {
+                            "Name": "characterSpacing",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "wordSpacing",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "lineSpacing",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "lineSpacingAdjustment",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "paragraphSpacing",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "textStyle",
+                            "Value": "{\"m_Name\":\"Normal\",\"m_HashCode\":-1183493901,\"m_OpeningDefinition\":\"\",\"m_ClosingDefinition\":\"\",\"m_OpeningTagArray\":[],\"m_ClosingTagArray\":[]}"
+                        },
+                        {
+                            "Name": "fontStyle",
+                            "Value": "{\"value__\":0}"
+                        }
+                    ]
+                }
+            ],
+            "Children": []
+        },
+        {
             "Name": "Image",
             "ComponentInfos": [
                 {
                     "Name": "RectTransform",
                     "Properties": [
                         {
-                            "Key": "sizeDelta",
+                            "Name": "sizeDelta",
                             "Value": "{\"x\":200.0,\"y\":200.0}"
                         },
                         {
-                            "Key": "pivot",
+                            "Name": "pivot",
                             "Value": "{\"x\":0.0,\"y\":1.0}"
                         },
                         {
-                            "Key": "anchorMin",
+                            "Name": "anchorMin",
                             "Value": "{\"x\":0.0,\"y\":1.0}"
                         },
                         {
-                            "Key": "anchorMax",
+                            "Name": "anchorMax",
                             "Value": "{\"x\":0.0,\"y\":1.0}"
                         },
                         {
-                            "Key": "localScale",
+                            "Name": "localScale",
                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                         },
                         {
-                            "Key": "localPosition",
+                            "Name": "localPosition",
                             "Value": "{\"x\":-335.0,\"y\":630.0,\"z\":0.0}"
                         },
                         {
-                            "Key": "localRotation",
+                            "Name": "localRotation",
                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                         },
                         {
-                            "Key": "anchoredPosition",
+                            "Name": "anchoredPosition",
                             "Value": "{\"x\":785.0,\"y\":0.0}"
                         }
                     ]
@@ -52,35 +156,35 @@
                     "Name": "RectTransform",
                     "Properties": [
                         {
-                            "Key": "sizeDelta",
+                            "Name": "sizeDelta",
                             "Value": "{\"x\":200.0,\"y\":200.0}"
                         },
                         {
-                            "Key": "pivot",
+                            "Name": "pivot",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "anchorMin",
+                            "Name": "anchorMin",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "anchorMax",
+                            "Name": "anchorMax",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "localScale",
+                            "Name": "localScale",
                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                         },
                         {
-                            "Key": "localPosition",
+                            "Name": "localPosition",
                             "Value": "{\"x\":1120.0,\"y\":-630.0,\"z\":0.0}"
                         },
                         {
-                            "Key": "localRotation",
+                            "Name": "localRotation",
                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                         },
                         {
-                            "Key": "anchoredPosition",
+                            "Name": "anchoredPosition",
                             "Value": "{\"x\":0.0,\"y\":0.0}"
                         }
                     ]
@@ -95,35 +199,35 @@
                     "Name": "RectTransform",
                     "Properties": [
                         {
-                            "Key": "sizeDelta",
+                            "Name": "sizeDelta",
                             "Value": "{\"x\":0.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "pivot",
+                            "Name": "pivot",
                             "Value": "{\"x\":0.5,\"y\":0.5}"
                         },
                         {
-                            "Key": "anchorMin",
+                            "Name": "anchorMin",
                             "Value": "{\"x\":0.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "anchorMax",
+                            "Name": "anchorMax",
                             "Value": "{\"x\":1.0,\"y\":1.0}"
                         },
                         {
-                            "Key": "localScale",
+                            "Name": "localScale",
                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                         },
                         {
-                            "Key": "localPosition",
+                            "Name": "localPosition",
                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0}"
                         },
                         {
-                            "Key": "localRotation",
+                            "Name": "localRotation",
                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                         },
                         {
-                            "Key": "anchoredPosition",
+                            "Name": "anchoredPosition",
                             "Value": "{\"x\":0.0,\"y\":0.0}"
                         }
                     ]
@@ -132,35 +236,35 @@
                     "Name": "GridLayoutGroup",
                     "Properties": [
                         {
-                            "Key": "startCorner",
+                            "Name": "startCorner",
                             "Value": "{\"value__\":0}"
                         },
                         {
-                            "Key": "startAxis",
+                            "Name": "startAxis",
                             "Value": "{\"value__\":0}"
                         },
                         {
-                            "Key": "cellSize",
+                            "Name": "cellSize",
                             "Value": "{\"x\":300.0,\"y\":300.0}"
                         },
                         {
-                            "Key": "spacing",
+                            "Name": "spacing",
                             "Value": "{\"x\":10.0,\"y\":10.0}"
                         },
                         {
-                            "Key": "constraint",
+                            "Name": "constraint",
                             "Value": "{\"value__\":0}"
                         },
                         {
-                            "Key": "constraintCount",
+                            "Name": "constraintCount",
                             "Value": "1"
                         },
                         {
-                            "Key": "padding",
+                            "Name": "padding",
                             "Value": "{}"
                         },
                         {
-                            "Key": "childAlignment",
+                            "Name": "childAlignment",
                             "Value": "{\"value__\":4}"
                         }
                     ]
@@ -174,36 +278,36 @@
                             "Name": "RectTransform",
                             "Properties": [
                                 {
-                                    "Key": "sizeDelta",
+                                    "Name": "sizeDelta",
                                     "Value": "{\"x\":300.0,\"y\":300.0}"
                                 },
                                 {
-                                    "Key": "pivot",
+                                    "Name": "pivot",
                                     "Value": "{\"x\":0.5,\"y\":0.5}"
                                 },
                                 {
-                                    "Key": "anchorMin",
+                                    "Name": "anchorMin",
                                     "Value": "{\"x\":0.0,\"y\":1.0}"
                                 },
                                 {
-                                    "Key": "anchorMax",
+                                    "Name": "anchorMax",
                                     "Value": "{\"x\":0.0,\"y\":1.0}"
                                 },
                                 {
-                                    "Key": "localScale",
+                                    "Name": "localScale",
                                     "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                 },
                                 {
-                                    "Key": "localPosition",
-                                    "Value": "{\"x\":-465.0,\"y\":0.0,\"z\":0.0}"
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":-953.0,\"y\":409.0,\"z\":0.0}"
                                 },
                                 {
-                                    "Key": "localRotation",
+                                    "Name": "localRotation",
                                     "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                 },
                                 {
-                                    "Key": "anchoredPosition",
-                                    "Value": "{\"x\":655.0,\"y\":-630.0}"
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":167.0,\"y\":-221.0}"
                                 }
                             ]
                         },
@@ -211,27 +315,27 @@
                             "Name": "LayoutElement",
                             "Properties": [
                                 {
-                                    "Key": "minWidth",
+                                    "Name": "minWidth",
                                     "Value": "300"
                                 },
                                 {
-                                    "Key": "minHeight",
+                                    "Name": "minHeight",
                                     "Value": "-1"
                                 },
                                 {
-                                    "Key": "preferredWidth",
+                                    "Name": "preferredWidth",
                                     "Value": "-1"
                                 },
                                 {
-                                    "Key": "preferredHeight",
+                                    "Name": "preferredHeight",
                                     "Value": "-1"
                                 },
                                 {
-                                    "Key": "flexibleWidth",
+                                    "Name": "flexibleWidth",
                                     "Value": "-1"
                                 },
                                 {
-                                    "Key": "flexibleHeight",
+                                    "Name": "flexibleHeight",
                                     "Value": "-1"
                                 }
                             ]
@@ -246,36 +350,36 @@
                             "Name": "RectTransform",
                             "Properties": [
                                 {
-                                    "Key": "sizeDelta",
+                                    "Name": "sizeDelta",
                                     "Value": "{\"x\":300.0,\"y\":300.0}"
                                 },
                                 {
-                                    "Key": "pivot",
+                                    "Name": "pivot",
                                     "Value": "{\"x\":0.5,\"y\":0.5}"
                                 },
                                 {
-                                    "Key": "anchorMin",
+                                    "Name": "anchorMin",
                                     "Value": "{\"x\":0.0,\"y\":1.0}"
                                 },
                                 {
-                                    "Key": "anchorMax",
+                                    "Name": "anchorMax",
                                     "Value": "{\"x\":0.0,\"y\":1.0}"
                                 },
                                 {
-                                    "Key": "localScale",
+                                    "Name": "localScale",
                                     "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                 },
                                 {
-                                    "Key": "localPosition",
-                                    "Value": "{\"x\":-155.0,\"y\":0.0,\"z\":0.0}"
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":-643.0,\"y\":409.0,\"z\":0.0}"
                                 },
                                 {
-                                    "Key": "localRotation",
+                                    "Name": "localRotation",
                                     "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                 },
                                 {
-                                    "Key": "anchoredPosition",
-                                    "Value": "{\"x\":965.0,\"y\":-630.0}"
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":477.0,\"y\":-221.0}"
                                 }
                             ]
                         }
@@ -289,36 +393,36 @@
                             "Name": "RectTransform",
                             "Properties": [
                                 {
-                                    "Key": "sizeDelta",
+                                    "Name": "sizeDelta",
                                     "Value": "{\"x\":300.0,\"y\":300.0}"
                                 },
                                 {
-                                    "Key": "pivot",
+                                    "Name": "pivot",
                                     "Value": "{\"x\":0.5,\"y\":0.5}"
                                 },
                                 {
-                                    "Key": "anchorMin",
+                                    "Name": "anchorMin",
                                     "Value": "{\"x\":0.0,\"y\":1.0}"
                                 },
                                 {
-                                    "Key": "anchorMax",
+                                    "Name": "anchorMax",
                                     "Value": "{\"x\":0.0,\"y\":1.0}"
                                 },
                                 {
-                                    "Key": "localScale",
+                                    "Name": "localScale",
                                     "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                 },
                                 {
-                                    "Key": "localPosition",
-                                    "Value": "{\"x\":155.0,\"y\":0.0,\"z\":0.0}"
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":-333.0,\"y\":409.0,\"z\":0.0}"
                                 },
                                 {
-                                    "Key": "localRotation",
+                                    "Name": "localRotation",
                                     "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                 },
                                 {
-                                    "Key": "anchoredPosition",
-                                    "Value": "{\"x\":1275.0,\"y\":-630.0}"
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":787.0,\"y\":-221.0}"
                                 }
                             ]
                         }
@@ -331,35 +435,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":300.0,\"y\":300.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":0.5,\"y\":0.5}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":460.0,\"y\":-150.0}"
                                         }
                                     ]
@@ -374,35 +478,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":300.0,\"y\":300.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":0.5,\"y\":0.5}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":460.0,\"y\":-150.0}"
                                         }
                                     ]
@@ -417,35 +521,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":300.0,\"y\":300.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":0.5,\"y\":0.5}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":460.0,\"y\":-150.0}"
                                         }
                                     ]
@@ -460,35 +564,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":300.0,\"y\":300.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":0.5,\"y\":0.5}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":460.0,\"y\":-150.0}"
                                         }
                                     ]
@@ -503,35 +607,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":300.0,\"y\":300.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":0.5,\"y\":0.5}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":460.0,\"y\":-150.0}"
                                         }
                                     ]
@@ -548,36 +652,36 @@
                             "Name": "RectTransform",
                             "Properties": [
                                 {
-                                    "Key": "sizeDelta",
+                                    "Name": "sizeDelta",
                                     "Value": "{\"x\":300.0,\"y\":300.0}"
                                 },
                                 {
-                                    "Key": "pivot",
+                                    "Name": "pivot",
                                     "Value": "{\"x\":0.5,\"y\":0.5}"
                                 },
                                 {
-                                    "Key": "anchorMin",
+                                    "Name": "anchorMin",
                                     "Value": "{\"x\":0.0,\"y\":1.0}"
                                 },
                                 {
-                                    "Key": "anchorMax",
+                                    "Name": "anchorMax",
                                     "Value": "{\"x\":0.0,\"y\":1.0}"
                                 },
                                 {
-                                    "Key": "localScale",
+                                    "Name": "localScale",
                                     "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                 },
                                 {
-                                    "Key": "localPosition",
-                                    "Value": "{\"x\":465.0,\"y\":0.0,\"z\":0.0}"
+                                    "Name": "localPosition",
+                                    "Value": "{\"x\":-953.0,\"y\":99.0,\"z\":0.0}"
                                 },
                                 {
-                                    "Key": "localRotation",
+                                    "Name": "localRotation",
                                     "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                 },
                                 {
-                                    "Key": "anchoredPosition",
-                                    "Value": "{\"x\":1585.0,\"y\":-630.0}"
+                                    "Name": "anchoredPosition",
+                                    "Value": "{\"x\":167.0,\"y\":-531.0}"
                                 }
                             ]
                         }
@@ -590,35 +694,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":300.0,\"y\":300.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":0.5,\"y\":0.5}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":460.0,\"y\":-150.0}"
                                         }
                                     ]
@@ -633,35 +737,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":300.0,\"y\":300.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":0.5,\"y\":0.5}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":0.0,\"y\":1.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":310.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":460.0,\"y\":-150.0}"
                                         }
                                     ]
@@ -680,35 +784,35 @@
                     "Name": "RectTransform",
                     "Properties": [
                         {
-                            "Key": "sizeDelta",
+                            "Name": "sizeDelta",
                             "Value": "{\"x\":200.0,\"y\":200.0}"
                         },
                         {
-                            "Key": "pivot",
+                            "Name": "pivot",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "anchorMin",
+                            "Name": "anchorMin",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "anchorMax",
+                            "Name": "anchorMax",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "localScale",
+                            "Name": "localScale",
                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                         },
                         {
-                            "Key": "localPosition",
+                            "Name": "localPosition",
                             "Value": "{\"x\":1120.0,\"y\":-630.0,\"z\":0.0}"
                         },
                         {
-                            "Key": "localRotation",
+                            "Name": "localRotation",
                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                         },
                         {
-                            "Key": "anchoredPosition",
+                            "Name": "anchoredPosition",
                             "Value": "{\"x\":0.0,\"y\":0.0}"
                         }
                     ]
@@ -722,35 +826,35 @@
                             "Name": "RectTransform",
                             "Properties": [
                                 {
-                                    "Key": "sizeDelta",
+                                    "Name": "sizeDelta",
                                     "Value": "{\"x\":200.0,\"y\":200.0}"
                                 },
                                 {
-                                    "Key": "pivot",
+                                    "Name": "pivot",
                                     "Value": "{\"x\":1.0,\"y\":0.0}"
                                 },
                                 {
-                                    "Key": "anchorMin",
+                                    "Name": "anchorMin",
                                     "Value": "{\"x\":1.0,\"y\":0.0}"
                                 },
                                 {
-                                    "Key": "anchorMax",
+                                    "Name": "anchorMax",
                                     "Value": "{\"x\":1.0,\"y\":0.0}"
                                 },
                                 {
-                                    "Key": "localScale",
+                                    "Name": "localScale",
                                     "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                 },
                                 {
-                                    "Key": "localPosition",
+                                    "Name": "localPosition",
                                     "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0}"
                                 },
                                 {
-                                    "Key": "localRotation",
+                                    "Name": "localRotation",
                                     "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                 },
                                 {
-                                    "Key": "anchoredPosition",
+                                    "Name": "anchoredPosition",
                                     "Value": "{\"x\":0.0,\"y\":0.0}"
                                 }
                             ]
@@ -764,35 +868,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":200.0,\"y\":200.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":1.0,\"y\":0.0}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":1.0,\"y\":0.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":1.0,\"y\":0.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":0.0,\"y\":0.0}"
                                         }
                                     ]
@@ -809,35 +913,35 @@
                             "Name": "RectTransform",
                             "Properties": [
                                 {
-                                    "Key": "sizeDelta",
+                                    "Name": "sizeDelta",
                                     "Value": "{\"x\":200.0,\"y\":200.0}"
                                 },
                                 {
-                                    "Key": "pivot",
+                                    "Name": "pivot",
                                     "Value": "{\"x\":1.0,\"y\":0.0}"
                                 },
                                 {
-                                    "Key": "anchorMin",
+                                    "Name": "anchorMin",
                                     "Value": "{\"x\":1.0,\"y\":0.0}"
                                 },
                                 {
-                                    "Key": "anchorMax",
+                                    "Name": "anchorMax",
                                     "Value": "{\"x\":1.0,\"y\":0.0}"
                                 },
                                 {
-                                    "Key": "localScale",
+                                    "Name": "localScale",
                                     "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                 },
                                 {
-                                    "Key": "localPosition",
+                                    "Name": "localPosition",
                                     "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0}"
                                 },
                                 {
-                                    "Key": "localRotation",
+                                    "Name": "localRotation",
                                     "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                 },
                                 {
-                                    "Key": "anchoredPosition",
+                                    "Name": "anchoredPosition",
                                     "Value": "{\"x\":0.0,\"y\":0.0}"
                                 }
                             ]
@@ -851,35 +955,35 @@
                                     "Name": "RectTransform",
                                     "Properties": [
                                         {
-                                            "Key": "sizeDelta",
+                                            "Name": "sizeDelta",
                                             "Value": "{\"x\":200.0,\"y\":200.0}"
                                         },
                                         {
-                                            "Key": "pivot",
+                                            "Name": "pivot",
                                             "Value": "{\"x\":1.0,\"y\":0.0}"
                                         },
                                         {
-                                            "Key": "anchorMin",
+                                            "Name": "anchorMin",
                                             "Value": "{\"x\":1.0,\"y\":0.0}"
                                         },
                                         {
-                                            "Key": "anchorMax",
+                                            "Name": "anchorMax",
                                             "Value": "{\"x\":1.0,\"y\":0.0}"
                                         },
                                         {
-                                            "Key": "localScale",
+                                            "Name": "localScale",
                                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                                         },
                                         {
-                                            "Key": "localPosition",
+                                            "Name": "localPosition",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0}"
                                         },
                                         {
-                                            "Key": "localRotation",
+                                            "Name": "localRotation",
                                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                                         },
                                         {
-                                            "Key": "anchoredPosition",
+                                            "Name": "anchoredPosition",
                                             "Value": "{\"x\":0.0,\"y\":0.0}"
                                         }
                                     ]
@@ -898,36 +1002,140 @@
                     "Name": "RectTransform",
                     "Properties": [
                         {
-                            "Key": "sizeDelta",
+                            "Name": "sizeDelta",
                             "Value": "{\"x\":200.0,\"y\":200.0}"
                         },
                         {
-                            "Key": "pivot",
+                            "Name": "pivot",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "anchorMin",
+                            "Name": "anchorMin",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "anchorMax",
+                            "Name": "anchorMax",
                             "Value": "{\"x\":1.0,\"y\":0.0}"
                         },
                         {
-                            "Key": "localScale",
+                            "Name": "localScale",
                             "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
                         },
                         {
-                            "Key": "localPosition",
+                            "Name": "localPosition",
                             "Value": "{\"x\":1120.0,\"y\":-630.0,\"z\":0.0}"
                         },
                         {
-                            "Key": "localRotation",
+                            "Name": "localRotation",
                             "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
                         },
                         {
-                            "Key": "anchoredPosition",
+                            "Name": "anchoredPosition",
                             "Value": "{\"x\":0.0,\"y\":0.0}"
+                        }
+                    ]
+                }
+            ],
+            "Children": []
+        },
+        {
+            "Name": "Text (TMP) (1)",
+            "ComponentInfos": [
+                {
+                    "Name": "RectTransform",
+                    "Properties": [
+                        {
+                            "Name": "sizeDelta",
+                            "Value": "{\"x\":200.0,\"y\":50.0}"
+                        },
+                        {
+                            "Name": "pivot",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "anchorMin",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "anchorMax",
+                            "Value": "{\"x\":0.5,\"y\":0.5}"
+                        },
+                        {
+                            "Name": "localScale",
+                            "Value": "{\"x\":1.0,\"y\":1.0,\"z\":1.0}"
+                        },
+                        {
+                            "Name": "localPosition",
+                            "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0}"
+                        },
+                        {
+                            "Name": "localRotation",
+                            "Value": "{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}"
+                        },
+                        {
+                            "Name": "anchoredPosition",
+                            "Value": "{\"x\":0.0,\"y\":0.0}"
+                        }
+                    ]
+                },
+                {
+                    "Name": "TextMeshProUGUI",
+                    "Properties": [
+                        {
+                            "Name": "alignment",
+                            "Value": "{\"value__\":257}"
+                        },
+                        {
+                            "Name": "horizontalAlignment",
+                            "Value": "{\"value__\":1}"
+                        },
+                        {
+                            "Name": "verticalAlignment",
+                            "Value": "{\"value__\":256}"
+                        },
+                        {
+                            "Name": "autoSizeTextContainer",
+                            "Value": "False"
+                        },
+                        {
+                            "Name": "fontSize",
+                            "Value": "36"
+                        },
+                        {
+                            "Name": "fontSizeMin",
+                            "Value": "18"
+                        },
+                        {
+                            "Name": "fontSizeMax",
+                            "Value": "72"
+                        },
+                        {
+                            "Name": "characterSpacing",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "wordSpacing",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "lineSpacing",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "lineSpacingAdjustment",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "paragraphSpacing",
+                            "Value": "0"
+                        },
+                        {
+                            "Name": "textStyle",
+                            "Value": "{\"m_Name\":\"Normal\",\"m_HashCode\":-1183493901,\"m_OpeningDefinition\":\"\",\"m_ClosingDefinition\":\"\",\"m_OpeningTagArray\":[],\"m_ClosingTagArray\":[]}"
+                        },
+                        {
+                            "Name": "fontStyle",
+                            "Value": "{\"value__\":0}"
                         }
                     ]
                 }

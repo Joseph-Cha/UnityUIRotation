@@ -5,22 +5,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine.SceneManagement;
-
-enum ComponentType
-{
-    RectTransform,
-    LayoutElement,
-    VerticalLayoutGroup,
-    GridLayoutGroup,
-    TMP_Text,
-    ScrollRect
-}
+using UnityEngine.UI;
+using TMPro;
 
 public class ComponentProperty : MonoBehaviour
 {
     public Transform Root;
     private ScreenOrientationState ScreenOrientationState = new ScreenOrientationState();
-    
     private void Awake()
     {
         if (Root == null)
@@ -93,12 +84,16 @@ public class ComponentProperty : MonoBehaviour
         ComponentsNode childNode = new ComponentsNode(childTransform.name);
         
         // 노드에 타겟의 컴포넌트 정보 입력
-        IEnumerable<Component> components = childTransform.GetComponents<Component>().Where(component => SelectByComponentType(component));
+        IEnumerable<Component> components = childTransform.GetComponents<Component>();
         foreach(var component in components)
         {
             Type componetType = component.GetType();
             string name = componetType?.Name;
-            childNode.ComponentInfos.Add(new ComponentInfo(name, component));
+            var componentInfo = new ComponentInfo(name, component);
+            if (componentInfo.IsExistProperties)
+            {
+                childNode.ComponentInfos.Add(componentInfo);
+            }
         }
 
         // 부모 노드에 타겟 노드를 연결
@@ -106,25 +101,22 @@ public class ComponentProperty : MonoBehaviour
 
         return childNode;
     }
-    
-    private bool SelectByComponentType(Component component)
-    {
-        Type componetType = component.GetType();
-        string name = componetType?.Name;
-        foreach(var type in Enum.GetValues(typeof(ComponentType)))
-        {
-            if (name.Equals(type?.ToString()))
-                return true;
-        }
-        return false;
-    }
+
     [ContextMenu("Load")]    
     public void Load()
     {
-        ComponentsNode node = null;
+        List<Component> components = new List<Component>();
+
+        if(components == null)
+        {
+            // components = 
+            //     Root.GetComponentsInChildren<Component>(true).
+            //     Where(component => component.CompareTag("UIProperty")).
+            //     Where(component => SelectByComponentType(component)).ToList();
+        }
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
         TextAsset jsonFile;
-        string resourcePath = $"{currentOrientation}/{SceneManager.GetActiveScene().name}/{Root.name}";
+        string resourcePath = $"{currentOrientation}/{Root.name}";
         jsonFile = Resources.Load<TextAsset>(resourcePath);
 
         if(jsonFile == null)
@@ -135,7 +127,11 @@ public class ComponentProperty : MonoBehaviour
 
         try
         {
-            node = JsonUtility.FromJson<ComponentsNode>(jsonFile.text);
+            var store = JsonUtility.FromJson<ComponentsNode>(jsonFile.text);
+            for (int i = 0; i < components.Count(); i++)
+            {
+                // store.Data[i].SetPropertyValueByComponent(components[i]);
+            }
         }
         catch(Exception e)
         {         
@@ -143,42 +139,8 @@ public class ComponentProperty : MonoBehaviour
             return;
         }
 
-        Transform currentTransform = Root;
-        ComponentsNode currentNode = node;
-        var childTransforms = new Queue<Transform>();
-        var componentsNodes = new Queue<ComponentsNode>();
-
-        while(true)
-        {
-            foreach(Transform child in currentTransform)
-            {
-                childTransforms.Enqueue(child);
-            }
-            foreach(ComponentsNode child in currentNode.Children)
-            {
-                componentsNodes.Enqueue(child);
-            }
-            if(childTransforms.Count == 0 || componentsNodes.Count == 0)
-                break;
-            currentTransform = childTransforms.Dequeue();
-            currentNode = componentsNodes.Dequeue();
-            Test(currentNode, currentTransform);
-        }
-        
         Debug.Log("Load complete");
     }
-    
-    private void Test(ComponentsNode node, Transform target)
-    {   
-        int i = 0;
-        IEnumerable<Component> components = target.GetComponents<Component>().Where(component => SelectByComponentType(component));
-        foreach(var component in components)
-        {
-            node.ComponentInfos[i].SetPropertyValueByComponent(component);
-            i++;
-        }
-    }
-
 
     private void CreateJsonDirectory()
     {
