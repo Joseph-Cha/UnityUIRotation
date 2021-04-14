@@ -15,7 +15,9 @@ public class PropertyNameValuePair
         this.Value = value;
     }
     
+    [SerializeField]
     public string Key;
+    [SerializeField]
     public string Value;
 }
 
@@ -23,7 +25,9 @@ public class PropertyNameValuePair
 [Serializable]
 public class ComponentInfo
 {
+    [SerializeField]
     public string Name;
+    [SerializeField]
     public List<PropertyNameValuePair> Properties = new List<PropertyNameValuePair>();
     public bool IsExistProperties => Properties.Count != 0;
     private ComponentInfo(string name) => this.Name = name;

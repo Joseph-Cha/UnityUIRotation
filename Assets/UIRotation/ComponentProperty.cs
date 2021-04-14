@@ -47,7 +47,8 @@ public class ComponentProperty : MonoBehaviour
         {
             foreach(Transform childTransform in currentRoot)
             {
-                ComponentsNode childNode = SetComponentInfoToNode(currentNode, childTransform);
+                ComponentsNode childNode = AddComponentInfo(childTransform);
+                currentNode.Children.Add(childNode);
                 transforms.Enqueue(childTransform);
                 componentsNodes.Enqueue(childNode);
             }
@@ -78,13 +79,13 @@ public class ComponentProperty : MonoBehaviour
         Debug.Log($"Save Complete.\nFile Location : {path}");
     }
 
-    private ComponentsNode SetComponentInfoToNode(ComponentsNode parentNode, Transform childTransform)
+    private ComponentsNode AddComponentInfo(Transform childTransform)
     {
-        // 타겟의 이름으로 노드 생성
-        ComponentsNode childNode = new ComponentsNode(childTransform.name);
+        // 타겟의 이름으로 자식 노드 생성
+        var childNode = new ComponentsNode(childTransform.name);
         
         // 노드에 타겟의 컴포넌트 정보 입력
-        IEnumerable<Component> components = childTransform.GetComponents<Component>();
+        var components = childTransform.GetComponents<Component>();
         foreach(var component in components)
         {
             Type componetType = component.GetType();
@@ -95,27 +96,16 @@ public class ComponentProperty : MonoBehaviour
                 childNode.ComponentInfos.Add(componentInfo);
             }
         }
-
-        // 부모 노드에 타겟 노드를 연결
-        parentNode.Children.Add(childNode);
-
+        // 부모 노드에 붙이기 위해서 자식 노드를 반환
         return childNode;
     }
 
     [ContextMenu("Load")]    
     public void Load()
     {
-        List<Component> components = new List<Component>();
-
-        if(components == null)
-        {
-            // components = 
-            //     Root.GetComponentsInChildren<Component>(true).
-            //     Where(component => component.CompareTag("UIProperty")).
-            //     Where(component => SelectByComponentType(component)).ToList();
-        }
-        string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
         TextAsset jsonFile;
+        ComponentsNode node = null;
+        string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
         string resourcePath = $"{currentOrientation}/{Root.name}";
         jsonFile = Resources.Load<TextAsset>(resourcePath);
 
@@ -127,11 +117,7 @@ public class ComponentProperty : MonoBehaviour
 
         try
         {
-            var store = JsonUtility.FromJson<ComponentsNode>(jsonFile.text);
-            for (int i = 0; i < components.Count(); i++)
-            {
-                // store.Data[i].SetPropertyValueByComponent(components[i]);
-            }
+            node = JsonUtility.FromJson<ComponentsNode>(jsonFile.text);
         }
         catch(Exception e)
         {         
@@ -139,9 +125,39 @@ public class ComponentProperty : MonoBehaviour
             return;
         }
 
-        Debug.Log("Load complete");
-    }
+        Transform currentRoot = Root;
+        ComponentsNode currentNode = node;
+        var transforms = new Queue<Transform>();
+        var componentsNodes = new Queue<ComponentsNode>();        
+        while(true)
+        {
+            foreach(Transform childTransform in Root)
+            {   
+                if(childTransform.tag.Contains("dynamic"))
+                    continue;
+                 SetComponentInfo(childTransform, currentNode);
+                transforms.Enqueue(childTransform);
+                // componentsNodes.Enqueue(childNode);
+            }
+            if(transforms.Count == 0)
+                break;
+            currentRoot = transforms.Dequeue();
+            currentNode = componentsNodes.Dequeue();
+        }
 
+        Debug.Log("Load perfectly");
+    }
+    private void SetComponentInfo(Transform childTransform, ComponentsNode parentNode)
+    {
+        
+        var components = childTransform.GetComponents<Component>();
+        int i = 0;
+        foreach(var component in components)
+        {
+            parentNode.ComponentInfos[i].SetPropertyValueByComponent(component);
+            i++;
+        }
+    }
     private void CreateJsonDirectory()
     {
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();

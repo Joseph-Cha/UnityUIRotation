@@ -220,6 +220,67 @@
                                     "Value": "{\"x\":100.0,\"y\":-125.0}"
                                 }
                             ]
+                        },
+                        {
+                            "Name": "TextMeshProUGUI",
+                            "Properties": [
+                                {
+                                    "Key": "alignment",
+                                    "Value": "{\"value__\":257}"
+                                },
+                                {
+                                    "Key": "horizontalAlignment",
+                                    "Value": "{\"value__\":1}"
+                                },
+                                {
+                                    "Key": "verticalAlignment",
+                                    "Value": "{\"value__\":256}"
+                                },
+                                {
+                                    "Key": "autoSizeTextContainer",
+                                    "Value": "False"
+                                },
+                                {
+                                    "Key": "fontSize",
+                                    "Value": "36"
+                                },
+                                {
+                                    "Key": "fontSizeMin",
+                                    "Value": "18"
+                                },
+                                {
+                                    "Key": "fontSizeMax",
+                                    "Value": "72"
+                                },
+                                {
+                                    "Key": "characterSpacing",
+                                    "Value": "0"
+                                },
+                                {
+                                    "Key": "wordSpacing",
+                                    "Value": "0"
+                                },
+                                {
+                                    "Key": "lineSpacing",
+                                    "Value": "0"
+                                },
+                                {
+                                    "Key": "lineSpacingAdjustment",
+                                    "Value": "0"
+                                },
+                                {
+                                    "Key": "paragraphSpacing",
+                                    "Value": "0"
+                                },
+                                {
+                                    "Key": "textStyle",
+                                    "Value": "{\"m_Name\":\"Normal\",\"m_HashCode\":-1183493901,\"m_OpeningDefinition\":\"\",\"m_ClosingDefinition\":\"\",\"m_OpeningTagArray\":[],\"m_ClosingTagArray\":[]}"
+                                },
+                                {
+                                    "Key": "fontStyle",
+                                    "Value": "{\"value__\":0}"
+                                }
+                            ]
                         }
                     ],
                     "Children": []
