@@ -9,10 +9,10 @@ public class ComponentsNode
     {
         Name = _name;
     }
-    [SerializeField]
+    [SerializeField]   
     public string Name;
-    [SerializeField]
+    [SerializeField]   
     public List<ComponentInfo> ComponentInfos = new List<ComponentInfo>();
-    [SerializeField]
+    [SerializeField]   
     public List<ComponentsNode> Children = new List<ComponentsNode>();  
 }

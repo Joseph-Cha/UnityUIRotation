@@ -53,8 +53,8 @@ public class ComponentsManager : MonoBehaviour
     {
         if(!Selection.activeGameObject)
             return;        
-        var ComponentsManager = Selection.activeGameObject.GetComponent<ComponentsManager>();
-        ComponentsManager.OnLoadEventHandler();
+        var UIPropertyManager = Selection.activeGameObject.GetComponent<ComponentsManager>();
+        UIPropertyManager.OnLoadEventHandler();
     }
 #endif
 }

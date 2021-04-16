@@ -14,10 +14,9 @@ public class PropertyNameValuePair
         this.Key = key;
         this.Value = value;
     }
-    
-    [SerializeField]
+    [SerializeField]   
     public string Key;
-    [SerializeField]
+    [SerializeField]   
     public string Value;
 }
 
@@ -25,9 +24,9 @@ public class PropertyNameValuePair
 [Serializable]
 public class ComponentInfo
 {
-    [SerializeField]
+    [SerializeField]   
     public string Name;
-    [SerializeField]
+    [SerializeField]   
     public List<PropertyNameValuePair> Properties = new List<PropertyNameValuePair>();
     public bool IsExistProperties => Properties.Count != 0;
     private ComponentInfo(string name) => this.Name = name;
@@ -172,23 +171,7 @@ public class ComponentInfo
 #endregion
 
 #region Load Logic
-    public void SetPropertyValueByComponent(Component component)
-    {
-        switch(component)
-        {
-            case RectTransform rectTransform:
-            case LayoutElement layoutElement:
-            case VerticalLayoutGroup verticalLayoutGroup:
-            case GridLayoutGroup gridLayoutGroup:
-            case TMP_Text text:
-            case ScrollRect scrollRect:
-                SetValueByTarget(component);
-                break;
-            default:
-                break;
-        }
-    }
-    private void SetValueByTarget(object target)
+    public void SetPropertyValueByComponent(object target)
     {
         foreach(var property in Properties)
         {
@@ -203,6 +186,7 @@ public class ComponentInfo
             info.SetValue(target, obj);
         }
     }
+
 #endregion
 
     // 향후 componet의 Property 값을 추가 하기 위해 삭제 금지
