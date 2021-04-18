@@ -23,27 +23,16 @@ public class ComponentsManager : MonoBehaviour
     
     private void Start()
     {
-#if UNITY_EDITOR
         currentOrientationType = ScreenOrientationState.CurrentOrientaion();
-#endif
-        currentOrientationType = Screen.orientation;
     }
     
     private void Update()
     {
-#if UNITY_EDITOR
         if(currentOrientationType != ScreenOrientationState.CurrentOrientaion())
         {
             currentOrientationType = ScreenOrientationState.CurrentOrientaion();
             OnLoadEventHandler();
         }
-#else
-        if(currentOrientationType != Screen.orientation )
-        {
-            currentOrientationType = Screen.orientation;
-            OnLoadEventHandler();
-        }
-#endif
     }
 
 #if UNITY_EDITOR

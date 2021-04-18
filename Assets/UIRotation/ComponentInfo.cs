@@ -38,7 +38,7 @@ public class ComponentInfo
     }
 
 #region PropertyNames
-    private Dictionary<Type, string[]> propertyNames = new Dictionary<Type, string[]>()
+   private Dictionary<Type, string[]> propertyNames = new Dictionary<Type, string[]>()
     {
         [typeof(RectTransform)] = new string[]
         {
@@ -68,8 +68,9 @@ public class ComponentInfo
             nameof(GridLayoutGroup.spacing),
             nameof(GridLayoutGroup.constraint),
             nameof(GridLayoutGroup.constraintCount),
-            nameof(GridLayoutGroup.padding),
-            nameof(GridLayoutGroup.childAlignment) 
+            nameof(GridLayoutGroup.childAlignment),
+            nameof(GridLayoutGroup.padding)
+
         },
         [typeof(VerticalLayoutGroup)] = new string[]   
         {
@@ -128,6 +129,13 @@ public class ComponentInfo
             nameof(ScrollRect.horizontalScrollbarSpacing),
             nameof(ScrollRect.verticalScrollbarSpacing)
         },
+        [typeof(RectOffset)] = new string[]   
+        { 
+            nameof(RectOffset.left),
+            nameof(RectOffset.right),
+            nameof(RectOffset.top),
+            nameof(RectOffset.bottom)
+        }
     };
 #endregion    
     
@@ -164,9 +172,15 @@ public class ComponentInfo
     }
     private object GetValueByPropertyName(string name, object target)
     {
-        Type type = target?.GetType();
-        PropertyInfo info = type.GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
-        return info?.GetValue(target);
+        Type type = target?.GetType();        
+        PropertyInfo info = type.GetProperty(name);//, BindingFlags.Public | BindingFlags.Instance);
+        if(info.PropertyType == typeof(RectOffset))
+        {
+            object obj = info;
+            return obj;
+            //return info.PropertyType.GetMember
+        }
+        return info.GetValue(target);
     }
 #endregion
 

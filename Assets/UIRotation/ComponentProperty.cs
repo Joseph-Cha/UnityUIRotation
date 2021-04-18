@@ -89,7 +89,7 @@ public class ComponentProperty : MonoBehaviour
             return;
         }
 
-        TreeSearch(Root, node, GetChildNodeForSave);
+        TreeSearch(Root, node, GetChildNodeForLoad);
 
         Debug.Log("Load perfectly");
     }    
@@ -129,7 +129,7 @@ public class ComponentProperty : MonoBehaviour
         var components = childTransform.GetComponents<Component>();
         foreach(var component in components)
         {
-            Type componetType = component.GetType();
+            Type componetType = component?.GetType();
             string name = componetType?.Name;
             var componentInfo = new ComponentInfo(name, component);
             if (componentInfo.IsExistProperties)
