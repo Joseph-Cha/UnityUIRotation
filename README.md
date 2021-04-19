@@ -5,18 +5,20 @@ GameView에서 가로 해상도로 UI 작업을 완료한 후 저장을 하고 �
 화면이 회전이 되면 각 해상도에 맞게 불러오는 작업을 수행합니다.
 
 ## 사전 준비
+- Newtonsoft.Json Package 다운로드
+  - ![화면 캡처 2021-04-19 094043](https://user-images.githubusercontent.com/75019048/115168480-05860400-a0f6-11eb-8831-ee4648696bbc.jpg)
+  - ![화면 캡처 2021-04-19 094219](https://user-images.githubusercontent.com/75019048/115168446-de2f3700-a0f5-11eb-8c93-8c7c3fd9e470.jpg)
+  - ![캡처](https://user-images.githubusercontent.com/75019048/115168509-25b5c300-a0f6-11eb-9a86-4610d9ce7048.PNG)
+  - url : https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#12.0.301https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#12.0.301
 - 빈 오브젝트에 `ComponentsManager` 스크립트 부착
 
 ## 저장
 ### 정적인 UI 데이터 저장
+![화면 캡처 2021-04-19 094019](https://user-images.githubusercontent.com/75019048/115168546-4bdb6300-a0f6-11eb-9620-34770eb8886f.jpg)
+![화면 캡처 2021-04-19 094043](https://user-images.githubusercontent.com/75019048/115168549-4da52680-a0f6-11eb-9644-b65024b0d5c2.jpg)
 1. Target이 될 Canvas에 `ComponentProperty` 스크립트 부착
 2. 가로 또는 세로 해상도에서 UI 화면 작업 진행
-3. ComponentProperty의 컴포넌트 메뉴에서 `SaveStatic` 버튼 클릭(또는 `shift + s` 단축키 입력)
-4. Assets/Resources/JsonData/{Orientation}/{SceneName}/{CanvasName} 경로에 저장 완료
-### 런타임 중 생성되는 UI(Prefab UI) 저장
-1. Prefab 수정 화면에 진입 후 최상단 오브젝트에 `ComponentProperty`를 부착
-2. 가로 또는 세로 해상도에서 UI 화면 작업 진행
-3. ComponentProperty의 컴포넌트 메뉴에서 `SaveDynamic` 버튼 클릭
+3. ComponentProperty의 컴포넌트 메뉴에서 `Save` 버튼 클릭(또는 `shift + s` 단축키 입력)
 4. Assets/Resources/JsonData/{Orientation}/{SceneName}/{CanvasName} 경로에 저장 완료
 
 ## 불러오기
