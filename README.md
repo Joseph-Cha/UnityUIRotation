@@ -11,7 +11,7 @@ GameView에서 가로 해상도로 UI 작업을 완료한 후 저장을 하고 �
   - 에셋스토어에서 **JSON .NET For Unity** 다운로드[[링크](https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347)]
 
 ## 저장
-### 정적인 UI 데이터 저장
+### UI 데이터 저장
 ![화면 캡처 2021-04-19 094019](https://user-images.githubusercontent.com/75019048/115168546-4bdb6300-a0f6-11eb-9620-34770eb8886f.jpg)
 ![화면 캡처 2021-04-19 094043](https://user-images.githubusercontent.com/75019048/115168549-4da52680-a0f6-11eb-9644-b65024b0d5c2.jpg)
 1. Target이 될 Canvas에 `ComponentProperty` 스크립트 부착
