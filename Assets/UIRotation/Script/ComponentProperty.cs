@@ -29,7 +29,11 @@ public class ComponentProperty : MonoBehaviour
         ComponentProperty.Save();
     }
 #endif
-
+    [ContextMenu("Save")]
+    public void OnSave()
+    {
+        Save();
+    }
     private void Save()
     {
         var node = new ComponentsNode(Root.name);
@@ -151,9 +155,9 @@ public class ComponentProperty : MonoBehaviour
         var components = childTransform.GetComponents<Component>();
         foreach(var component in components)
         {
-            Type componetType = component.GetType();
-            string name = componetType.Name;
-            childNode?.ComponentInfos.Find(info => info.Name.Contains(name))?.SetPropertyValueByComponent(component);
+            Type componetType = component?.GetType();
+            string name = componetType?.Name;
+            childNode.ComponentInfos.Find(info => info.Name == name)?.SetPropertyValueByComponent(component);
         }
     }
     private void CreateJsonDirectory()
