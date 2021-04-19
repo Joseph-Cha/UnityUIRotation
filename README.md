@@ -5,12 +5,13 @@ GameView에서 가로 해상도로 UI 작업을 완료한 후 저장을 하고 �
 화면이 회전이 되면 각 해상도에 맞게 불러오는 작업을 수행합니다.
 
 ## 사전 준비
+- 태그에서 "Dynamic" 태그 추가
+- 빈 오브젝트에 `ComponentsManager` 스크립트 부착
 - Newtonsoft.Json Package 다운로드
   - ![화면 캡처 2021-04-19 094043](https://user-images.githubusercontent.com/75019048/115168480-05860400-a0f6-11eb-8831-ee4648696bbc.jpg)
   - ![화면 캡처 2021-04-19 094219](https://user-images.githubusercontent.com/75019048/115168446-de2f3700-a0f5-11eb-8c93-8c7c3fd9e470.jpg)
   - ![캡처](https://user-images.githubusercontent.com/75019048/115168509-25b5c300-a0f6-11eb-9a86-4610d9ce7048.PNG)
   - url : https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#12.0.301https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#12.0.301
-- 빈 오브젝트에 `ComponentsManager` 스크립트 부착
 
 ## 저장
 ### 정적인 UI 데이터 저장
