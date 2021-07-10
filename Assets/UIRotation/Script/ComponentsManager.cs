@@ -1,49 +1,26 @@
 using UnityEngine;
-using UnityEditor;
 
 public class ComponentsManager : MonoBehaviour
 {    
-    private static ComponentsManager instance = null;
-    public static ComponentsManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<ComponentsManager>();
-            }
-            return instance;
-        }
-    }
-    public delegate void Load();
-    public event Load OnLoadEventHandler;
+    private static ComponentsManager instance;
+    public static ComponentsManager Instance => instance ??= FindObjectOfType<ComponentsManager>();
+    public delegate void ScreenRotationEventHandler();
+    public event ScreenRotationEventHandler ScreenRotated;
     private ScreenOrientationState ScreenOrientationState = new ScreenOrientationState();    
     private ScreenOrientation currentOrientationType;
-
-    
-    private void Start()
+    private void Awake()
     {
-        currentOrientationType = ScreenOrientationState.CurrentOrientaion();
+        if(Instance != this)
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
-    
+    private void Start() => currentOrientationType = ScreenOrientationState.CurrentOrientaion();
     private void Update()
     {
         if(currentOrientationType != ScreenOrientationState.CurrentOrientaion())
         {
             currentOrientationType = ScreenOrientationState.CurrentOrientaion();
-            OnLoadEventHandler();
+            ScreenRotated?.Invoke();
         }
     }
-
-#if UNITY_EDITOR
-
-    [MenuItem("ComponentProperty/Load #l")] 
-    static public void OnLoadMenu()
-    {
-        if(!Selection.activeGameObject)
-            return;        
-        var UIPropertyManager = Selection.activeGameObject.GetComponent<ComponentsManager>();
-        UIPropertyManager.OnLoadEventHandler();
-    }
-#endif
 }

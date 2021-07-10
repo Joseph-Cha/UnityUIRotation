@@ -5,24 +5,33 @@ using UnityEngine;
 
 public class ScreenOrientationState
 {
+    public bool IsLandscape => CurrentOrientaion() == ScreenOrientation.Portrait ? false : true;
     private ScreenOrientation type;
     public string GetPathByOrientation()
     {
+        string path = $"JsonData/Portrait";
         type = CurrentOrientaion();
-        string path;
         
         switch (type)
         {
-            case ScreenOrientation.Portrait:
-                path = $"JsonData/Portrait";
-                break;
-            case ScreenOrientation.Landscape:
+            case ScreenOrientation.LandscapeLeft:
+            case ScreenOrientation.LandscapeRight:
                 path = $"JsonData/Landscape";
                 break;
-            default:
-                return null;
         }
-
+        return path;
+    }
+    public string GetPathByOrientation(ScreenOrientation type)
+    {
+        string path = $"JsonData/Portrait";
+        
+        switch (type)
+        {
+            case ScreenOrientation.LandscapeLeft:
+            case ScreenOrientation.LandscapeRight:
+                path = $"JsonData/Landscape";
+                break;
+        }
         return path;
     }
 
@@ -54,4 +63,5 @@ public class ScreenOrientationState
 
         return (Vector2)SizeOfMainGameView;
     }
+
 }

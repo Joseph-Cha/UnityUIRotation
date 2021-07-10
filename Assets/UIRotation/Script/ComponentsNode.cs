@@ -5,14 +5,11 @@ using UnityEngine;
 [Serializable]
 public class ComponentsNode
 {
-    public ComponentsNode(string _name)
+    public ComponentsNode(string name)
     {
-        Name = _name;
+        this.Name = name;
     }
-    [SerializeField]   
     public string Name;
-    [SerializeField]   
     public List<ComponentInfo> ComponentInfos = new List<ComponentInfo>();
-    [SerializeField]   
     public List<ComponentsNode> Children = new List<ComponentsNode>();  
 }
