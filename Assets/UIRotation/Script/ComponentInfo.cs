@@ -14,9 +14,8 @@ public class PropertyNameValuePair
         this.Key = key;
         this.Value = value;
     }
-    [SerializeField]   
+     
     public string Key;
-    [SerializeField]   
     public string Value;
 }
 
@@ -24,9 +23,7 @@ public class PropertyNameValuePair
 [Serializable]
 public class ComponentInfo
 {
-    [SerializeField]   
     public string Name;
-    [SerializeField]   
     public List<PropertyNameValuePair> Properties = new List<PropertyNameValuePair>();
     public bool IsExistProperties => Properties.Count != 0;
     private ComponentInfo(string name) => this.Name = name;
@@ -38,7 +35,7 @@ public class ComponentInfo
     }
 
 #region PropertyNames
-   private Dictionary<Type, string[]> propertyNames = new Dictionary<Type, string[]>()
+    private Dictionary<Type, string[]> propertyNames = new Dictionary<Type, string[]>()
     {
         [typeof(RectTransform)] = new string[]
         {
@@ -58,7 +55,8 @@ public class ComponentInfo
             nameof(LayoutElement.preferredWidth),
             nameof(LayoutElement.preferredHeight),
             nameof(LayoutElement.flexibleWidth),
-            nameof(LayoutElement.flexibleHeight)
+            nameof(LayoutElement.flexibleHeight),
+            nameof(LayoutElement.ignoreLayout)
         },    
         [typeof(GridLayoutGroup)] = new string[]   
         {
@@ -68,9 +66,7 @@ public class ComponentInfo
             nameof(GridLayoutGroup.spacing),
             nameof(GridLayoutGroup.constraint),
             nameof(GridLayoutGroup.constraintCount),
-            nameof(GridLayoutGroup.childAlignment),
-            nameof(GridLayoutGroup.padding)
-
+            nameof(GridLayoutGroup.childAlignment) 
         },
         [typeof(VerticalLayoutGroup)] = new string[]   
         {
@@ -82,7 +78,6 @@ public class ComponentInfo
             nameof(VerticalLayoutGroup.childScaleWidth),
             nameof(VerticalLayoutGroup.childScaleHeight),
             nameof(VerticalLayoutGroup.reverseArrangement),
-            nameof(VerticalLayoutGroup.padding),
             nameof(VerticalLayoutGroup.childAlignment)
         },
         [typeof(HorizontalLayoutGroup)] = new string[]   
@@ -95,7 +90,6 @@ public class ComponentInfo
             nameof(HorizontalLayoutGroup.childScaleWidth),
             nameof(HorizontalLayoutGroup.childScaleHeight),
             nameof(HorizontalLayoutGroup.reverseArrangement),
-            nameof(HorizontalLayoutGroup.padding),
             nameof(HorizontalLayoutGroup.childAlignment)
         },
         [typeof(TMP_Text)] = new string[]   
@@ -129,12 +123,10 @@ public class ComponentInfo
             nameof(ScrollRect.horizontalScrollbarSpacing),
             nameof(ScrollRect.verticalScrollbarSpacing)
         },
-        [typeof(RectOffset)] = new string[]   
-        { 
-            nameof(RectOffset.left),
-            nameof(RectOffset.right),
-            nameof(RectOffset.top),
-            nameof(RectOffset.bottom)
+        [typeof(ContentSizeFitter)] = new string[]   
+        {
+            nameof(ContentSizeFitter.horizontalFit),
+            nameof(ContentSizeFitter.verticalFit)
         }
     };
 #endregion    
@@ -155,7 +147,7 @@ public class ComponentInfo
                     {
                         Properties.Add(new PropertyNameValuePair(
                             propertyName, GetValueByPropertyName(propertyName, target).ToString()));
-                    }
+                    }                
                     else
                     {
                         Properties.Add(new PropertyNameValuePair(
@@ -172,15 +164,9 @@ public class ComponentInfo
     }
     private object GetValueByPropertyName(string name, object target)
     {
-        Type type = target?.GetType();        
-        PropertyInfo info = type.GetProperty(name);//, BindingFlags.Public | BindingFlags.Instance);
-        if(info.PropertyType == typeof(RectOffset))
-        {
-            object obj = info;
-            return obj;
-            //return info.PropertyType.GetMember
-        }
-        return info.GetValue(target);
+        Type type = target?.GetType();
+        PropertyInfo info = type.GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
+        return info?.GetValue(target);
     }
 #endregion
 
