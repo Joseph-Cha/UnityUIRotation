@@ -4,7 +4,7 @@
 ## 1. ComponentsNode
 - 역할
     - 부모 노드에서 자식의 component 데이터를 트리 구조로 보관하기 위해 설계
-### Field
+### Propertises
 - Name : string
     - 부모 노드의 이름
 - ComponentInfos : List<ComponentInfo>
@@ -14,15 +14,15 @@
 
 ## 2. ComponentInfo
 - 역할
-    - 노드에 붙어 있는  한 가지의 Component 정보를 보관하기 위해 설계
-### Field 
-- Name : string
+    - 노드에 붙어 있는  한가지의 Component 정보를 보관하기 위해 설계
+### Propertises
+- string Name
     - Component의 이름
-- Properties : List<PropertyNameValuePair>
+- List<PropertyNameValuePair> Properties
     - 노드에 붙어있는 Component의 이름과 값을 보관
-- PropertyNames : Dictionary<Type, string[]>
+- Dictionary<Type, string[]> PropertyNames
     - Component 타입별로 속성의 이름을 저장 -> 향후 저장이 될 속성 값을 별도로 명시
-### Method
+### Methods
 - ComponentInfo(string, Component)
     - ComponentInfo를 생성할 때 component의 타입에 따라 데이터 저장
 - AddSerializeData(object) : void
@@ -35,7 +35,7 @@
 ## 3. PropertyNameValuePair
 - 역할
     - Component 속성의 이름과 값을 보관
-### Field
+### Propertises
 - Name : string
     - Component 속성의 이름
 - Value : string
@@ -44,10 +44,10 @@
 ## 4. ComponentProperty
 - 역할
     - Orientation 변경될 때마다 해당 Orientation에 대응하는 Component의 속성 값을 가지고 와서 현재 UI에 값을 할당하도록 설계
-### Field
+### Propertises
 - Root : Transform
     - 최상단 노드
-### Method
+### Methods
 - Save : void
     - Root의 자식 노드를 탐색하여 트리 구조로 Component 값을 저장한 후 직렬화하여 Resources 폴더에 저장
 - Load : void
@@ -56,10 +56,10 @@
 ## 5. ComponentsManager
 - 역할
     - Orientation 변경될 때 모든 ComponentProperty의 Load 메서드를 Callback 하기 위해 설계
-### Field
+### Property
 - OnLoadEventHandler : event
     - ComponentProperty의 Load 메서드를 저장
-### Method
+### Methods
 - Update() : void
     - Orientation 변경될 때 ComponentProperty의 Load 메서드를 callback
 - OnLoadMenu() : void
