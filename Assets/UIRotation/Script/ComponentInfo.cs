@@ -6,19 +6,6 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 
-[Serializable]
-public class PropertyNameValuePair
-{
-    public PropertyNameValuePair(string key, string value)
-    {
-        this.Key = key;
-        this.Value = value;
-    }
-     
-    public string Key;
-    public string Value;
-}
-
 // 하나의 Root Transform에서 가지고 있는 components들의 속성 정보를 저장
 [Serializable]
 public class ComponentInfo
