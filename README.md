@@ -26,3 +26,6 @@ GameView에서 가로 해상도로 UI 작업을 완료한 후 저장을 하고 �
 ### 플레이 모드 중 불러오기
 1. 플레이 버튼 클릭
 2. 해상도를 바꾸면 자동으로 해당 해상도로 작업했던 UI 화면이 불러와 짐
+
+## 샘플
+![샘플](https://github.com/Joseph-Cha/UnityRotateUI/blob/main/GIF/Sample.gif?raw=true)
