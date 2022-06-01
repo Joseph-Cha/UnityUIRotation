@@ -8,8 +8,6 @@ GameView에서 가로 해상도로 UI 작업을 완료한 후 저장을 하고 �
 ## 사전 준비
 - 태그에서 "Ignore" 태그 추가
 - 빈 오브젝트에 `ComponentsManager` 스크립트 부착
-- Newtonsoft.Json Package 다운로드
-  - 에셋스토어에서 **JSON .NET For Unity** 다운로드[[링크](https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347)]
 
 ## 저장
 ### UI 데이터 저장
