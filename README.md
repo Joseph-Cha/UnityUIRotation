@@ -1,16 +1,15 @@
-
-# UI Rotaion 사용법 
-## 목적
+# Unity UI Rotaion 
 Screen이 가로 모드 또는 세로 모드일 때 UI의 배치 및 크기가 달라지는 것을 대응하기 위한 모듈입니다.
 가로 해상도로 UI 작업을 완료한 후 저장을 하고 마찬가지로 세로 해상도에서 UI 작업을 완료한 후 저장을 해주면
 화면이 회전 되었을 때 자동으로 가로 세로 해상도에 맞는 UI를 셋팅합니다.
+
+# 사용 방법
 
 ## 사전 준비
 - 태그에서 "Ignore" 태그 추가
 - 빈 오브젝트에 `ComponentsManager` 스크립트 부착
 
-## 저장
-### UI 데이터 저장
+## UI 데이터 저장
 ![화면 캡처 2021-04-19 094043](https://user-images.githubusercontent.com/75019048/115168549-4da52680-a0f6-11eb-9644-b65024b0d5c2.jpg)
 1. Target이 될 Canvas에 `ComponentProperty` 스크립트 부착
 2. 가로 또는 세로 해상도에서 UI 화면 작업 진행
