@@ -108,12 +108,12 @@ public class ComponentProperty : MonoBehaviour
         Debug.Log($"Load perfectly. Current Orientaion : {type} / Target name : {transform.name}");
     }    
 
-    private void TreeSearch(Transform root, ComponentsNode node, Func<Transform, ComponentsNode, ComponentsNode> callBackForGettingChildNode)
+    private void TreeSearch(Transform rootTransform, ComponentsNode rootNode, Func<Transform, ComponentsNode, ComponentsNode> callBackForGettingChildNode)
     {
-        Transform currentTransform = root;
-        ComponentsNode currentNode = node;
+        Transform currentTransform = rootTransform;
+        ComponentsNode currentNode = rootNode;
         var transforms = new Queue<(Transform, ComponentsNode)>();
-        while(true)
+        while(transforms.Count > 0)
         {
             foreach (Transform childTransform in currentTransform)
             { 
@@ -125,10 +125,10 @@ public class ComponentProperty : MonoBehaviour
 
                 ComponentsNode childNode = callBackForGettingChildNode(childTransform, currentNode);
                 if(childNode != null)
+                {
                     transforms.Enqueue((childTransform, childNode));
+                }
             }
-            if(transforms.Count == 0)
-                break;
             currentTransform = transforms.Peek().Item1;
             currentNode = transforms.Dequeue().Item2;
         }
