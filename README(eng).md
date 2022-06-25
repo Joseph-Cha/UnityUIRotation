@@ -14,7 +14,7 @@ And then, automatically set the UI to match the aspect resolution when the scree
 1. Attach 'ComponentProperty' script to target Canvas
 2. Proceed with UI screen operation in landscape or portrait resolution
 3. Click the 'Save' button on the Component menu in Component Property (or enter the 'shift + s' shortcut)
-4. `Assets/Resources/JsonData/{Orientation}/{SceneName}/{CanvasName}` 경로에 저장 완료
+4. Saved Path: `Assets/Resources/JsonData/{Orientation}/{SceneName}/{CanvasName}` 
 
 ## Load
 ### Load from Editor Mode
