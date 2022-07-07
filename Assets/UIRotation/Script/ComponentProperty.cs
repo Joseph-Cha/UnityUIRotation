@@ -9,26 +9,26 @@ using UnityEngine.UI;
 
 public class ComponentProperty : MonoBehaviour
 {
-    public Transform Root;
+    public Transform Root => this.transform;
     private ComponentsNode portraitNode = null;
     private ComponentsNode landscapeNode = null;
     private ScreenOrientationState ScreenOrientationState = new ScreenOrientationState();
-    private ScreenOrientation currentOrientationType;
-    private string IgnoreTag = "Ignore";
+    private const string IgnoreTag = "Ignore";
+
     private void Awake()
     {
-        if(Root == null)
-            Root = this.transform;
-    #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         portraitNode = GetNodeByCurrentOrientation(ScreenOrientation.Portrait);
         landscapeNode = GetNodeByCurrentOrientation(ScreenOrientation.Landscape);
-    #endif
+#endif
     }
+
     private void OnEnable()
     {
         ComponentsManager.Instance.ScreenRotated += Load;
         Load();
     }
+
     private void OnDisable() => ComponentsManager.Instance.ScreenRotated -= Load;
 
 #if UNITY_EDITOR
@@ -40,6 +40,7 @@ public class ComponentProperty : MonoBehaviour
         var ComponentProperty = Selection.activeGameObject.GetComponent<ComponentProperty>();
         ComponentProperty.Save();
     }
+
     [MenuItem("ComponentProperty/Load #l")]
     static public void OnLoadMenu()
     {
@@ -108,23 +109,21 @@ public class ComponentProperty : MonoBehaviour
         Debug.Log($"Load perfectly. Current Orientaion : {type} / Target name : {transform.name}");
     }    
 
-    private void TreeSearch(Transform rootTransform, ComponentsNode rootNode, Func<Transform, ComponentsNode, ComponentsNode> callBackForGettingChildNode)
+    private void TreeSearch(Transform root, ComponentsNode node, Func<Transform, ComponentsNode, ComponentsNode> nodeSelector)
     {
-        Transform currentTransform = rootTransform;
-        ComponentsNode currentNode = rootNode;
+        Transform currentTransform = root;
+        ComponentsNode currentNode = node;
         var transforms = new Queue<(Transform, ComponentsNode)>();
-        while(transforms.Count > 0)
+        while (transforms.Count > 0)
         {
             foreach (Transform childTransform in currentTransform)
             { 
-                // IgnoreTag가 달린 GameObject는 탐색을 건너뜀
                 if (childTransform.tag == IgnoreTag)
-                {
                     continue;
-                }
 
-                ComponentsNode childNode = callBackForGettingChildNode(childTransform, currentNode);
-                if(childNode != null)
+                ComponentsNode childNode = nodeSelector(childTransform, currentNode);
+
+                if (childNode != null)
                 {
                     transforms.Enqueue((childTransform, childNode));
                 }
@@ -148,7 +147,7 @@ public class ComponentProperty : MonoBehaviour
         
         // 노드에 타겟의 컴포넌트 정보 입력
         var components = childTransform.GetComponents<Component>();
-        foreach(var component in components)
+        foreach (var component in components)
         {
             Type componetType = component.GetType();
             string name = componetType.Name;
@@ -165,7 +164,7 @@ public class ComponentProperty : MonoBehaviour
     private ComponentsNode GetChildNodeForLoad(Transform child, ComponentsNode node)
     {
         ComponentsNode childNode = node?.Children.Find(node => node.Name == child.name);
-        if(childNode != null)
+        if (childNode != null)
             SetComponentInfo(child, childNode);
         return childNode;
     }
@@ -173,7 +172,7 @@ public class ComponentProperty : MonoBehaviour
     private void SetComponentInfo(Transform transform, ComponentsNode node)
     {
         var components = transform.GetComponents<Component>();
-        foreach(var component in components)
+        foreach (var component in components)
         {
             Type componetType = component.GetType();
             string name = componetType.Name;
@@ -186,7 +185,7 @@ public class ComponentProperty : MonoBehaviour
     {
         string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
         string path = $"{Application.dataPath}/Resources/{currentOrientation}/{SceneManager.GetActiveScene().name}";
-        if(!File.Exists(path))
+        if (!File.Exists(path))
             Directory.CreateDirectory(path);
     }
 
@@ -195,7 +194,7 @@ public class ComponentProperty : MonoBehaviour
         ComponentsNode node = null;
         string name = Root.name;
         string toRemove = "(Clone)";
-        if(name.Contains(toRemove))
+        if (name.Contains(toRemove))
         {
             int i = Root.name.IndexOf(toRemove);
             if(i >= 0)
@@ -205,7 +204,7 @@ public class ComponentProperty : MonoBehaviour
         string resourcePath = $"{currentPath}/{SceneManager.GetActiveScene().name}/{name}";        
         TextAsset jsonFile = Resources.Load<TextAsset>(resourcePath);
 
-        if(jsonFile == null)
+        if (jsonFile == null)
         {
             Debug.LogWarning("It couldn't find saved file. You must save first and try again");
             return null;
@@ -218,7 +217,7 @@ public class ComponentProperty : MonoBehaviour
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize
             });
         }
-        catch(Exception e)
+        catch (Exception e)
         {         
             Debug.LogError(e.Message);   
             return null;
