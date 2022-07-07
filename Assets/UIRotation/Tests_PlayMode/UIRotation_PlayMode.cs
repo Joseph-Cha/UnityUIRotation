@@ -81,7 +81,6 @@ public class UIRotation_PlayModeTest
 
 
         ComponentProperty ComponentProperty = parent.AddComponent<ComponentProperty>();
-        ComponentProperty.Root = parent.transform;
         Selection.activeGameObject = parent;
         
         string resourcePath = $"{currentOrientation}/{SceneManager.GetActiveScene().name}/{parent.name}";
@@ -132,7 +131,6 @@ public class UIRotation_PlayModeTest
         gchild2.transform.SetParent(child1.transform);
         gchild3.transform.SetParent(child2.transform);
         gchild4.transform.SetParent(child2.transform);
-        ComponentProperty.Root = parent.transform;
 
         bool result = false;
         
