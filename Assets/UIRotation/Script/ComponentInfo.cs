@@ -1,10 +1,10 @@
-using UnityEngine;
 using System;
-using UnityEngine.UI;
-using TMPro;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 // 하나의 Root Transform에서 가지고 있는 components들의 속성 정보를 저장
 [Serializable]
@@ -21,19 +21,19 @@ public class ComponentInfo
         return type.GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
     }
 
-#region PropertyNames
+    #region PropertyNames
     private Dictionary<Type, string[]> propertyNames = new Dictionary<Type, string[]>()
     {
         [typeof(RectTransform)] = new string[]
         {
             nameof(RectTransform.sizeDelta),
-            nameof(RectTransform.pivot), 
+            nameof(RectTransform.pivot),
             nameof(RectTransform.anchorMin),
             nameof(RectTransform.anchorMax),
             nameof(RectTransform.localScale),
             nameof(RectTransform.localPosition),
             nameof(RectTransform.localRotation),
-            nameof(RectTransform.anchoredPosition)  
+            nameof(RectTransform.anchoredPosition)
         },
         [typeof(LayoutElement)] = new string[]
         {
@@ -44,8 +44,8 @@ public class ComponentInfo
             nameof(LayoutElement.flexibleWidth),
             nameof(LayoutElement.flexibleHeight),
             nameof(LayoutElement.ignoreLayout)
-        },    
-        [typeof(GridLayoutGroup)] = new string[]   
+        },
+        [typeof(GridLayoutGroup)] = new string[]
         {
             nameof(GridLayoutGroup.startCorner),
             nameof(GridLayoutGroup.startAxis),
@@ -53,9 +53,9 @@ public class ComponentInfo
             nameof(GridLayoutGroup.spacing),
             nameof(GridLayoutGroup.constraint),
             nameof(GridLayoutGroup.constraintCount),
-            nameof(GridLayoutGroup.childAlignment) 
+            nameof(GridLayoutGroup.childAlignment)
         },
-        [typeof(VerticalLayoutGroup)] = new string[]   
+        [typeof(VerticalLayoutGroup)] = new string[]
         {
             nameof(VerticalLayoutGroup.spacing),
             nameof(VerticalLayoutGroup.childForceExpandWidth),
@@ -67,7 +67,7 @@ public class ComponentInfo
             nameof(VerticalLayoutGroup.reverseArrangement),
             nameof(VerticalLayoutGroup.childAlignment)
         },
-        [typeof(HorizontalLayoutGroup)] = new string[]   
+        [typeof(HorizontalLayoutGroup)] = new string[]
         {
             nameof(HorizontalLayoutGroup.spacing),
             nameof(HorizontalLayoutGroup.childForceExpandWidth),
@@ -79,7 +79,7 @@ public class ComponentInfo
             nameof(HorizontalLayoutGroup.reverseArrangement),
             nameof(HorizontalLayoutGroup.childAlignment)
         },
-        [typeof(TMP_Text)] = new string[]   
+        [typeof(TMP_Text)] = new string[]
         {
             nameof(TMP_Text.alignment),
             nameof(TMP_Text.horizontalAlignment),
@@ -96,7 +96,7 @@ public class ComponentInfo
             nameof(TMP_Text.textStyle),
             nameof(TMP_Text.fontStyle)
         },
-        [typeof(ScrollRect)] = new string[]   
+        [typeof(ScrollRect)] = new string[]
         {
             nameof(ScrollRect.horizontal),
             nameof(ScrollRect.vertical),
@@ -110,38 +110,38 @@ public class ComponentInfo
             nameof(ScrollRect.horizontalScrollbarSpacing),
             nameof(ScrollRect.verticalScrollbarSpacing)
         },
-        [typeof(ContentSizeFitter)] = new string[]   
+        [typeof(ContentSizeFitter)] = new string[]
         {
             nameof(ContentSizeFitter.horizontalFit),
             nameof(ContentSizeFitter.verticalFit)
         }
     };
-#endregion    
-    
-#region Save Logic
+    #endregion
+
+    #region Save Logic
     private void AddSerializeData(object target)
     {
         var ComponentTypes = propertyNames.Keys.ToList();
         var type = ComponentTypes.Find(x => x.IsInstanceOfType(target));
-        if(type != null)
+        if (type != null)
         {
-            foreach(var propertyName in propertyNames[type])
+            foreach (var propertyName in propertyNames[type])
             {
                 try
                 {
                     PropertyInfo info = GetPropertyInfo(propertyName, target);
-                    if(info.PropertyType.IsPrimitive)
+                    if (info.PropertyType.IsPrimitive)
                     {
                         Properties.Add(new PropertyNameValuePair(
                             propertyName, GetValueByPropertyName(propertyName, target).ToString()));
-                    }                
+                    }
                     else
                     {
                         Properties.Add(new PropertyNameValuePair(
                             propertyName, JsonUtility.ToJson(GetValueByPropertyName(propertyName, target))));
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Debug.LogError(e.Message);
                     continue;
@@ -155,17 +155,17 @@ public class ComponentInfo
         PropertyInfo info = type.GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
         return info?.GetValue(target);
     }
-#endregion
+    #endregion
 
-#region Load Logic
+    #region Load Logic
     public void SetPropertyValueByComponent(object target)
     {
-        foreach(var property in Properties)
+        foreach (var property in Properties)
         {
             PropertyInfo info = GetPropertyInfo(property.Key, target);
             Type PropertyType = info?.PropertyType;
             object obj = null;
-            if(PropertyType.IsPrimitive)
+            if (PropertyType.IsPrimitive)
                 obj = Convert.ChangeType(property.Value, PropertyType);
             else
                 obj = JsonUtility.FromJson(property.Value, PropertyType);
@@ -174,7 +174,7 @@ public class ComponentInfo
         }
     }
 
-#endregion
+    #endregion
 
     // 향후 componet의 Property 값을 추가 하기 위해 삭제 금지
     // private PropertyInfo[] RectTransformInfos;

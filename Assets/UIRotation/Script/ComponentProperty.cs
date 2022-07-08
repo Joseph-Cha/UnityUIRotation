@@ -1,10 +1,10 @@
-using UnityEngine;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using Newtonsoft.Json;
 using UnityEngine.UI;
 
 public class ComponentProperty : MonoBehaviour
@@ -35,8 +35,8 @@ public class ComponentProperty : MonoBehaviour
     [MenuItem("ComponentProperty/Save #s")]
     static public void OnSaveMenu()
     {
-        if(!Selection.activeGameObject)
-            return;     
+        if (!Selection.activeGameObject)
+            return;
         var ComponentProperty = Selection.activeGameObject.GetComponent<ComponentProperty>();
         ComponentProperty.Save();
     }
@@ -44,8 +44,8 @@ public class ComponentProperty : MonoBehaviour
     [MenuItem("ComponentProperty/Load #l")]
     static public void OnLoadMenu()
     {
-        if(!Selection.activeGameObject)
-            return;     
+        if (!Selection.activeGameObject)
+            return;
         var ComponentProperty = Selection.activeGameObject.GetComponent<ComponentProperty>();
         ComponentProperty.Load();
     }
@@ -55,8 +55,8 @@ public class ComponentProperty : MonoBehaviour
     {
         string name = Root.name;
         var node = new ComponentsNode(Root.name);
-        string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
-        string path =  $"{Application.dataPath}/Resources/{currentOrientation}/{SceneManager.GetActiveScene().name}/{Root.name}.json";
+        string currentOrientation = ScreenOrientationState.GetPathByOrientation();
+        string path = $"{Application.dataPath}/Resources/{currentOrientation}/{SceneManager.GetActiveScene().name}/{Root.name}.json";
         string jsonData = string.Empty;
         node = AddComponentInfo(Root);
         TreeSearch(Root, node, GetChildNodeForSave);
@@ -69,7 +69,7 @@ public class ComponentProperty : MonoBehaviour
                 Formatting = Formatting.Indented
             });
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.LogError(e.Message);
             return;
@@ -77,37 +77,37 @@ public class ComponentProperty : MonoBehaviour
         // Save a json file to Resources folder
         CreateDirectory();
         File.WriteAllText(path, jsonData);
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         var relativePath = $"Assets/Resources/{currentOrientation}/{SceneManager.GetActiveScene().name}/{Root.name}.json";
         AssetDatabase.ImportAsset(relativePath);
-    #endif
+#endif
         Debug.Log($"Save Complete.\nFile Location : {path}");
     }
-    
+
     public void Load()
     {
         ScreenOrientation type = ScreenOrientationState.CurrentOrientaion();
-        switch(type)
+        switch (type)
         {
             case ScreenOrientation.Portrait:
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
                 this.portraitNode = GetNodeByCurrentOrientation(type);
-            #endif
+#endif
                 SetComponentInfo(Root, this.portraitNode);
                 TreeSearch(Root, this.portraitNode, GetChildNodeForLoad);
                 break;
             case ScreenOrientation.LandscapeLeft:
             case ScreenOrientation.LandscapeRight:
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
                 this.landscapeNode = GetNodeByCurrentOrientation(type);
-            #endif
+#endif
                 SetComponentInfo(Root, this.landscapeNode);
                 TreeSearch(Root, this.landscapeNode, GetChildNodeForLoad);
                 break;
         }
         LayoutGroupUpdate();
         Debug.Log($"Load perfectly. Current Orientaion : {type} / Target name : {transform.name}");
-    }    
+    }
 
     private void TreeSearch(Transform root, ComponentsNode node, Func<Transform, ComponentsNode, ComponentsNode> nodeSelector)
     {
@@ -117,7 +117,7 @@ public class ComponentProperty : MonoBehaviour
         while (transforms.Count > 0)
         {
             foreach (Transform childTransform in currentTransform)
-            { 
+            {
                 if (childTransform.tag == IgnoreTag)
                     continue;
 
@@ -131,7 +131,7 @@ public class ComponentProperty : MonoBehaviour
             currentTransform = transforms.Peek().Item1;
             currentNode = transforms.Dequeue().Item2;
         }
-    } 
+    }
 
     private ComponentsNode GetChildNodeForSave(Transform child, ComponentsNode node)
     {
@@ -144,7 +144,7 @@ public class ComponentProperty : MonoBehaviour
     {
         // 타겟의 이름으로 노드 생성
         var node = new ComponentsNode(childTransform.name);
-        
+
         // 노드에 타겟의 컴포넌트 정보 입력
         var components = childTransform.GetComponents<Component>();
         foreach (var component in components)
@@ -183,7 +183,7 @@ public class ComponentProperty : MonoBehaviour
 
     private void CreateDirectory()
     {
-        string currentOrientation =  ScreenOrientationState.GetPathByOrientation();
+        string currentOrientation = ScreenOrientationState.GetPathByOrientation();
         string path = $"{Application.dataPath}/Resources/{currentOrientation}/{SceneManager.GetActiveScene().name}";
         if (!File.Exists(path))
             Directory.CreateDirectory(path);
@@ -197,11 +197,11 @@ public class ComponentProperty : MonoBehaviour
         if (name.Contains(toRemove))
         {
             int i = Root.name.IndexOf(toRemove);
-            if(i >= 0)
+            if (i >= 0)
                 name = Root.name.Remove(i, toRemove.Length);
         }
-        string currentPath =  ScreenOrientationState.GetPathByOrientation(type);
-        string resourcePath = $"{currentPath}/{SceneManager.GetActiveScene().name}/{name}";        
+        string currentPath = ScreenOrientationState.GetPathByOrientation(type);
+        string resourcePath = $"{currentPath}/{SceneManager.GetActiveScene().name}/{name}";
         TextAsset jsonFile = Resources.Load<TextAsset>(resourcePath);
 
         if (jsonFile == null)
@@ -218,8 +218,8 @@ public class ComponentProperty : MonoBehaviour
             });
         }
         catch (Exception e)
-        {         
-            Debug.LogError(e.Message);   
+        {
+            Debug.LogError(e.Message);
             return null;
         }
         return node;
@@ -233,7 +233,7 @@ public class ComponentProperty : MonoBehaviour
             layoutGroup.CalculateLayoutInputHorizontal();
             layoutGroup.CalculateLayoutInputVertical();
             layoutGroup.SetLayoutHorizontal();
-            layoutGroup.SetLayoutVertical();        
+            layoutGroup.SetLayoutVertical();
         }
     }
 }

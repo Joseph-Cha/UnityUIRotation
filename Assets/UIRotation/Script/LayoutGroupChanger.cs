@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +13,11 @@ public class LayoutGroupChanger : MonoBehaviour
     [MenuItem("ComponentProperty/Change #c")]
     static public void OnSaveMenu()
     {
-        if(!Selection.activeGameObject)
-            return;     
+        if (!Selection.activeGameObject)
+            return;
         var activeGameObject = Selection.activeGameObject;
         var LayoutGroupChangers = activeGameObject.GetComponentsInChildren<LayoutGroupChanger>();
-        foreach(var LayoutGroupChanger in LayoutGroupChangers)
+        foreach (var LayoutGroupChanger in LayoutGroupChangers)
         {
             LayoutGroupChanger.Change();
         }
@@ -30,22 +28,22 @@ public class LayoutGroupChanger : MonoBehaviour
         ScreenOrientation type = ScreenOrientationState.CurrentOrientaion();
         DestroyImmediate(gameObject.GetComponent<LayoutGroup>());
 
-            switch(type)
-            {
-                case ScreenOrientation.Portrait:
-                    if(!isReverse)
-                        gameObject.AddComponent<VerticalLayoutGroup>();
-                    else
-                        gameObject.AddComponent<HorizontalLayoutGroup>();
-                    break;
-                case ScreenOrientation.LandscapeRight:
-                case ScreenOrientation.LandscapeLeft:
-                    if(!isReverse)
-                        gameObject.AddComponent<HorizontalLayoutGroup>();
-                    else
-                        gameObject.AddComponent<VerticalLayoutGroup>();
-                    break;
-            }
+        switch (type)
+        {
+            case ScreenOrientation.Portrait:
+                if (!isReverse)
+                    gameObject.AddComponent<VerticalLayoutGroup>();
+                else
+                    gameObject.AddComponent<HorizontalLayoutGroup>();
+                break;
+            case ScreenOrientation.LandscapeRight:
+            case ScreenOrientation.LandscapeLeft:
+                if (!isReverse)
+                    gameObject.AddComponent<HorizontalLayoutGroup>();
+                else
+                    gameObject.AddComponent<VerticalLayoutGroup>();
+                break;
+        }
 
         string currentName = transform.name;
         string layoutGroupName = gameObject.GetComponent<LayoutGroup>().GetType().Name;

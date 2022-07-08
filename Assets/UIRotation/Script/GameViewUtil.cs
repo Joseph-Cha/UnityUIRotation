@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 #if UNITY_EDITOR
 //출처 : https://answers.unity.com/questions/956123/add-and-select-game-view-resolution.html
@@ -29,20 +28,20 @@ public static class GameViewUtil
 
     [MenuItem("RectTransformProperty/Screen : Landscape screen #h")]
     public static void SetLandscapeScreen() => SetScreen(2240, 1260);
-    
+
     [MenuItem("RectTransformProperty/Screen : Portrait screen #v")]
     public static void SetPortraitScreen() => SetScreen(1260, 2240);
-    
+
     private static void SetScreen(int width, int height)
     {
-        if(!SizeExists(GameViewSizeGroupType.Android, width, height))
+        if (!SizeExists(GameViewSizeGroupType.Android, width, height))
         {
             AddCustomSize(GameViewSizeType.FixedResolution, GameViewSizeGroupType.Android, width, height, width > height ? "ViewLandScape" : "ViewPortrait");
         }
         int num = FindSize(GameViewSizeGroupType.Android, width, height);
         SetSize(num);
     }
-    
+
     private static void SetSize(int index)
     {
         var gvWndType = typeof(Editor).Assembly.GetType("UnityEditor.GameView");

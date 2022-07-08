@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using System;
-using UnityEngine;
+using System.Collections.Generic;
 
 [Serializable]
 public class ComponentsNode
@@ -11,5 +10,5 @@ public class ComponentsNode
     }
     public string Name;
     public List<ComponentInfo> ComponentInfos = new List<ComponentInfo>();
-    public List<ComponentsNode> Children = new List<ComponentsNode>();  
+    public List<ComponentsNode> Children = new List<ComponentsNode>();
 }
