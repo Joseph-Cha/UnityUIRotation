@@ -1,0 +1,17 @@
+{
+	"name" : "com.josephc.uirotation",
+	"version" : "1.1.1",
+	"displayName" : "Unity UI Rotation",
+	"description" : "Make uGUI rotated when screen orientation changed",
+	"unity" : "2020.3",
+	"keywords" : [ "Unity", "uGUI" ],
+    "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.0",
+        "com.unity.textmeshpro": "3.0.6"
+     },
+	"author" : {
+		"name" : "joseph.c",
+		"email" : "jospeh.c@kakao.com",
+		"url" : "https://github.com/Joseph-Cha"
+	}
+}
