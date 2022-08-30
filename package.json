@@ -13,5 +13,12 @@
 		"name" : "joseph.c",
 		"email" : "jospeh.c@kakao.com",
 		"url" : "https://github.com/Joseph-Cha"
-	}
+	},
+	"samples": [
+		{
+			"displayName": "Demo",
+			"description": "UI Rotation Demo",
+			"path": "Samples~/UIRotationSample"
+		}
+	]
 }
